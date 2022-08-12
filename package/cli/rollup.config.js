@@ -9,5 +9,6 @@ export default {
     file: "dist/index.js",
     format: "cjs",
     banner: "#! /usr/bin/env node", // 输出文件添加头
+    // globals: ['npm-fetch', 'download-git-repo']
   },
 };

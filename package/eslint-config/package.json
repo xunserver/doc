@@ -1,0 +1,25 @@
+{
+  "name": "@xunserver/eslint-config",
+  "version": "0.0.2",
+  "description": "xunserver's lint configure",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "eslint",
+    "stylelint"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^8.22.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.4",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.0",
+    "prettier": "^2.7.1"
+  }
+}

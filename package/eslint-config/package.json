@@ -1,6 +1,6 @@
 {
   "name": "@xunserver/eslint-config",
-  "version": "0.0.2",
+  "version": "0.0.7",
   "description": "xunserver's lint configure",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
     "eslint": "^8.22.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-standard": "^17.0.0",
@@ -20,6 +22,7 @@
     "eslint-plugin-n": "^15.2.4",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^9.3.0",
     "prettier": "^2.7.1"
   }
 }

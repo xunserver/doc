@@ -4,11 +4,11 @@ module.exports = {
     useTabs: false, // 允许tab
     semi: false,    // 允许分好
     singleQuote: true,  // 允许单引号
-    quoteProps: 'as-need', // 是否包括对象的属性名
+    quoteProps: 'as-needed', // 是否包括对象的属性名
     jsxSingleQuote: false, // jsx 中是否使用单引号
     trailingComma: 'es5', // 是否添加尾逗号
     bracketSpacing: true, // 花括号和圆括号是否加空格  { a: b }
-    bracketSameLine: true,  // html 标签的 > 是否不换行
+    bracketSameLine: false,  // html 标签的 > 是否不换行
     arrowParens: true,  // 箭头函数是否添加括号
     rangeStart: 0,  // 校验起始位置
     rangeEnd: Infinity,  // 校验终结位置

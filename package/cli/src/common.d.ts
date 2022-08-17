@@ -3,7 +3,7 @@ interface BaseOptions {
 }
 
 interface AddOption extends BaseOptions {
-    
+    config?: string
 }
 
 interface InitOptions extends BaseOptions {

@@ -1,6 +1,6 @@
 {
-  "name": "@xunserver/prettier",
-  "version": "0.0.3",
+  "name": "@xunserver/prettier-config",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {

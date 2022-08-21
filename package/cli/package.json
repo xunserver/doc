@@ -48,7 +48,8 @@
     "typescript": "4.7.4"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "rollup -c"

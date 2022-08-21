@@ -1,6 +1,6 @@
 {
   "name": "@xunserver/eslint-config",
-  "version": "0.0.8",
+  "version": "0.0.3",
   "description": "xunserver's lint configure",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/eslint-parser": "^7.18.9",
     "@typescript-eslint/eslint-plugin": "^5.33.1",
     "@typescript-eslint/parser": "^5.33.1",
     "eslint": "^8.22.0",

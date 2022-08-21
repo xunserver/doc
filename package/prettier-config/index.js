@@ -9,7 +9,7 @@ module.exports = {
     trailingComma: 'es5', // 是否添加尾逗号
     bracketSpacing: true, // 花括号和圆括号是否加空格  { a: b }
     bracketSameLine: false,  // html 标签的 > 是否不换行
-    arrowParens: true,  // 箭头函数是否添加括号
+    arrowParens: 'always',  // 箭头函数是否添加括号
     rangeStart: 0,  // 校验起始位置
     rangeEnd: Infinity,  // 校验终结位置
     proseWrap: 'preserve', // 对于md中中的连续的文本是否需要按照printWidth进行换行。

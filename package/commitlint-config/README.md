@@ -10,7 +10,7 @@
 ```js
 // .commitlintrc.js
 module.exports = {
-    extends: ['@xunserver/commitlint']
+    extends: ['@xunserver/commitlint-config']
 }
 ```
 

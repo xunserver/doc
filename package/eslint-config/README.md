@@ -17,3 +17,13 @@ module.exports = {
     extends: ['@xunserver/eslint-config/vue-ts'] // vue3 + ts
 }
 ```
+
+## 注意
+默认使用的eslint.parser是@babel/eslint-parser，这种情况下总是需要配置eslint和.eslintrc.js。如果项目中使用eslint，请覆盖parser配置
+```js
+// .eslintrc.js
+module.exports = {
+    parser: "espree",
+    extends: ['@xunserver/eslint-config/base']
+}
+```

@@ -1,7 +1,14 @@
 module.exports = {
-  parser: 'vue-eslint-parser',
-  parserOptions: {
-    parser: '@babel/eslint-parser'
-  },
-  extends: [require.resolve("./recommended"), "plugin:vue/vue3-recommended"],
-};
+  overrides: [
+    {
+      files: ['*.vue'],
+      parser: 'vue-eslint-parser',
+      parserOptions: {
+        parser: '@babel/eslint-parser',
+        ...(require('./babel').parserOptions || {}),
+      },
+      extends: ['plugin:vue/vue3-recommended'],
+    },
+  ],
+  extends: ['./babel'],
+}

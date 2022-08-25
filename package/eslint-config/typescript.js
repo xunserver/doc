@@ -1,5 +1,12 @@
 module.exports = {
-  parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
-  extends: ["./base.js", "plugin:@typescript-eslint/recommended"],
-};
+  extends: ['./base.js'],
+  overrides: [
+    {
+      files: ['*.ts', 'tsx'],
+      extends: [
+        'plugin:@typescript-eslint/recommended',
+        // "plugin:@typescript-eslint/recommended-requiring-type-checking",
+      ],
+    },
+  ],
+}

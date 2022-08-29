@@ -1,11 +1,11 @@
-interface BaseOptions {
+export interface BaseOptions {
     method: 'git' | 'npm'
 }
 
-interface AddOption extends BaseOptions {
+export interface AddOption extends BaseOptions {
     config?: string
 }
 
-interface InitOptions extends BaseOptions {
+export interface InitOptions extends BaseOptions {
     template: string
 }

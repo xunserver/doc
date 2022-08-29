@@ -1,16 +1,15 @@
 import { program, Argument } from "commander"
-import * as inquirer from "inquirer";
-import { resolve } from 'path'
+import { AddOption } from "../../common";
 import { action as lintAction } from "./lint";
 
 
 // 下载
-function downloadLintConfig(repo) {
+function downloadLintConfig() {
 
 }
 
 // 根据配置名加载配置
-function loadByConfig(configName) {
+function loadByConfig() {
 
 }
 
@@ -33,7 +32,7 @@ program
     const { method, config } = option;
 
     if (config) {
-      return loadByConfig(config)
+      return loadByConfig()
     }
     switch (type) {
       case 'lint':

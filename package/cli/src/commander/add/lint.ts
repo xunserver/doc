@@ -1,9 +1,9 @@
-const  inquirer  = require("inquirer");
-import { sequenceIterate } from "../../utils/common";
 import shelljs from 'shelljs'
-import fs from 'fs-extra'
 import { resolve } from 'path'
+import inquirer from 'inquirer'
+import { sequenceIterate } from "../../utils/common";
 import { renderAndOutput } from "../../utils/render";
+import { AddOption } from "../../common";
 
 const addEslint = async function (answer: Answer, context: Context) {
   // 安装@xunserver/eslint-config

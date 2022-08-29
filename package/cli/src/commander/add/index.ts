@@ -1,7 +1,8 @@
 import { program, Argument } from "commander"
-import inquirer from "inquirer";
+import * as inquirer from "inquirer";
 import { resolve } from 'path'
 import { action as lintAction } from "./lint";
+
 
 // 下载
 function downloadLintConfig(repo) {

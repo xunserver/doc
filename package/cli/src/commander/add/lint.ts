@@ -1,4 +1,4 @@
-import inquirer from "inquirer";
+const  inquirer  = require("inquirer");
 import { sequenceIterate } from "../../utils/common";
 import shelljs from 'shelljs'
 import fs from 'fs-extra'
@@ -21,21 +21,42 @@ const addEslint = async function (answer: Answer, context: Context) {
   renderAndOutput(resolve(__dirname, './template/eslintrc.js'), '.eslintrc.js', { eslintType })
 }
 
-const addStylelint = async function () {
+const addStylelint = async function (answer: Answer, context: Context) {
+ shelljs.exec('npm i -D @xunserver/stylelint-config')
 
+ const configFileName = '.stylelintrc.js'
+ shelljs.cp(configFileName, `${configFileName}.bak`)
+
+ let type = answer.framework;
+
+ // 通过添加配置文件
+ renderAndOutput(resolve(__dirname, `./template/${configFileName.substring(1)}`), configFileName, { type })
 }
 
-const addPrettier = async function () {
+const addPrettier = async function (answer: Answer, context: Context) {
+  shelljs.exec('npm i -D @xunserver/prettier-config')
 
-}
+  const configFileName = '.prettierrc.js'
+  shelljs.cp(configFileName, `${configFileName}.bak`)
+  // 通过添加配置文件
+  renderAndOutput(resolve(__dirname, `./template/${configFileName.substring(1)}`), configFileName, {})
+ }
 
 const addEditorconfig = async function () {
-
+  shelljs.exec('npm i -D @xunserver/vscode-config')
+  shelljs.cp('.editorconfig', '.editorconfig.bak')
+  shelljs.cp('node_modules/@xunserver/vscode-config/.editorconfig', '.editorconfig')
 }
 
-const addCommitlint = async function () {
+const addCommitlint = async function (answer: Answer) {
+  shelljs.exec('npm i -D @xunserver/prettier-config')
 
-}
+  const configFileName = '.commitlintrc.js'
+  shelljs.cp(configFileName, `${configFileName}.bak`)
+ 
+  // 通过添加配置文件
+  renderAndOutput(resolve(__dirname, `./template/${configFileName.substring(1)}`), configFileName, {})
+ }
 
 const actionMaps: { [key: string]: Function } = {
   'eslint': addEslint,
@@ -48,6 +69,7 @@ const actionMaps: { [key: string]: Function } = {
 interface Answer {
   framework: string;
   typescript: boolean;
+  location: 'root' | 'vscode'
   lints: string[]
 }
 

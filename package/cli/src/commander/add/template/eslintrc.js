@@ -1,3 +1,3 @@
 module.exports = {
-    extends: ['@xunserver/{{eslintType}}']
+    extends: ['@xunserver/babel-config/<%= eslintType %>']
 }

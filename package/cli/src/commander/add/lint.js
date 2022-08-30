@@ -1,11 +1,14 @@
 import shelljs from 'shelljs'
-import { resolve } from 'path'
-import inquirer from 'inquirer'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
+import inquirer  from 'inquirer'
 import { sequenceIterate } from "../../utils/common";
 import { renderAndOutput } from "../../utils/render";
-import { AddOption } from "../../common";
 
-const addEslint = async function (answer: Answer, context: Context) {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const addEslint = async function (answer, context) {
   // 安装@xunserver/eslint-config
   shelljs.exec('npm i -D @xunserver/eslint-config')
 
@@ -17,11 +20,13 @@ const addEslint = async function (answer: Answer, context: Context) {
     eslintType = eslintType + '-ts'
   }
 
+  console.log(__dirname)
+
   // 通过添加配置文件
   renderAndOutput(resolve(__dirname, './template/eslintrc.js'), '.eslintrc.js', { eslintType })
 }
 
-const addStylelint = async function (answer: Answer, context: Context) {
+const addStylelint = async function (answer, context) {
  shelljs.exec('npm i -D @xunserver/stylelint-config')
 
  const configFileName = '.stylelintrc.js'
@@ -33,7 +38,7 @@ const addStylelint = async function (answer: Answer, context: Context) {
  renderAndOutput(resolve(__dirname, `./template/${configFileName.substring(1)}`), configFileName, { type })
 }
 
-const addPrettier = async function (answer: Answer, context: Context) {
+const addPrettier = async function (answer, context) {
   shelljs.exec('npm i -D @xunserver/prettier-config')
 
   const configFileName = '.prettierrc.js'
@@ -48,7 +53,7 @@ const addEditorconfig = async function () {
   shelljs.cp('node_modules/@xunserver/vscode-config/.editorconfig', '.editorconfig')
 }
 
-const addCommitlint = async function (answer: Answer) {
+const addCommitlint = async function (answer) {
   shelljs.exec('npm i -D @xunserver/prettier-config')
 
   const configFileName = '.commitlintrc.js'
@@ -58,7 +63,7 @@ const addCommitlint = async function (answer: Answer) {
   renderAndOutput(resolve(__dirname, `./template/${configFileName.substring(1)}`), configFileName, {})
  }
 
-const actionMaps: { [key: string]: Function } = {
+const actionMaps = {
   'eslint': addEslint,
   'stylelint': addStylelint,
   'prettier': addPrettier,
@@ -66,19 +71,8 @@ const actionMaps: { [key: string]: Function } = {
   'commitlint': addCommitlint
 }
 
-interface Answer {
-  framework: string;
-  typescript: boolean;
-  location: 'root' | 'vscode'
-  lints: string[]
-}
-
-interface Context {
-  cwd: string
-}
-
-export const action = async (option: AddOption) => {
-  const answer: Answer = await inquirer.prompt([
+export const action = async (option) => {
+  const answer = await inquirer.prompt([
     {
       type: 'rawlist',
       name: 'framework',
@@ -118,7 +112,7 @@ export const action = async (option: AddOption) => {
     return await sequenceIterate(actions, answer)
   }
 
-  const context: Context = {
+  const context = {
     cwd: process.cwd()
   }
 

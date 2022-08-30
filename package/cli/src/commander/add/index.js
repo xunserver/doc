@@ -1,5 +1,4 @@
 import { program, Argument } from "commander"
-import { AddOption } from "../../common";
 import { action as lintAction } from "./lint";
 
 
@@ -28,7 +27,7 @@ program
     'git'
   )
 
-  .action(async (type, option: AddOption) => {
+  .action(async (type, option) => {
     const { method, config } = option;
 
     if (config) {

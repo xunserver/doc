@@ -3,12 +3,6 @@ import { resolve } from 'path'
 
 import { fetchGit, fetchNpm } from "../utils/fetch";
 
-interface ActionOptions {
-  template: string,
-  method: string,
-}
-
-
 program
   .command("init")
   .alias("i")
@@ -22,7 +16,7 @@ program
     'git'
   )
   
-  .action(async (name: string, dest: string = name, { template, method }: ActionOptions) => {
+  .action(async (name, dest = name, { template, method }) => {
     const fullDest = resolve(process.cwd(), name || dest)
     if(method === 'git') {
       await fetchGit(template, fullDest)

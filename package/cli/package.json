@@ -1,11 +1,10 @@
 {
   "name": "@xunserver/cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "xs 前端脚手架工具，用于快速生成项目",
   "main": "dist/index.js",
   "bin": {
-    "xs": "dist/index.js",
-    "xs-dev": "src/index.js"
+    "xs": "dist/index.js"
   },
   "keywords": [
     "cli",

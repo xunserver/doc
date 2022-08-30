@@ -1,11 +1,12 @@
 import shelljs from 'shelljs'
-import { resolve } from 'path'
+import { resolve, dirname } from 'path'
+import { fileURLToPath } from 'url'
 import inquirer  from 'inquirer'
 import { sequenceIterate } from "../../utils/common";
 import { renderAndOutput } from "../../utils/render";
-import { rootDirName } from '../../instance';
 
-const __dirname = resolve(rootDirName, 'src/commander/add')
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const addEslint = async function (answer, context) {
   // 安装@xunserver/eslint-config
@@ -68,7 +69,7 @@ const actionMaps = {
   'commitlint': addCommitlint
 }
 
-export const action = async (option) => {
+export const lintAction = async (option) => {
   const answer = await inquirer.prompt([
     {
       type: 'rawlist',

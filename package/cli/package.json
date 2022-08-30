@@ -18,15 +18,15 @@
     "cross-spawn": "7.0.3",
     "download-git-repo": "^3.0.2",
     "ejs": "^3.1.8",
-    "inquirer": "9.1.0",
-    "shelljs": "^0.8.5"
+    "inquirer": "9.1.0"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^22.0.2",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "rollup": "2.77.2",
-    "rollup-plugin-copy": "^3.4.0"
+    "rollup-plugin-copy": "^3.4.0",
+    "shelljs": "^0.8.5"
   },
   "type": "module",
   "files": [
@@ -35,6 +35,6 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "pub": "npm version patch && npm publish --access public"
+    "pub": "rollup -c && npm version patch && npm publish --access public"
   }
 }

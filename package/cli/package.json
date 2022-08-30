@@ -1,6 +1,6 @@
 {
   "name": "@xunserver/cli",
-  "version": "0.0.4",
+  "version": "0.0.8",
   "description": "xs 前端脚手架工具，用于快速生成项目",
   "main": "dist/index.js",
   "bin": {
@@ -34,6 +34,7 @@
     "README.md"
   ],
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "pub": "npm version patch && npm publish --access public"
   }
 }

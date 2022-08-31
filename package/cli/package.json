@@ -2,9 +2,9 @@
   "name": "@xunserver/cli",
   "version": "0.0.19",
   "description": "xs 前端脚手架工具，用于快速生成项目",
-  "main": "dist/index.js",
+  "main": "dist/index.mjs",
   "bin": {
-    "xs": "dist/index.js"
+    "xs": "dist/index.mjs"
   },
   "keywords": [
     "cli",
@@ -28,13 +28,12 @@
     "rollup-plugin-copy": "^3.4.0",
     "shelljs": "^0.8.5"
   },
-  "type": "module",
   "files": [
     "dist",
     "README.md"
   ],
   "scripts": {
     "build": "rollup -c",
-    "pub": "rollup -c && npm version patch && npm publish --access public"
+    "pub": "npm run build & node build/publish"
   }
 }

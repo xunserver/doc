@@ -10,7 +10,7 @@ on:
 jobs:
   publish_npm_for_cli:
     runs-on: ubuntu-latest
-
+    if: contains(github.event.commits[0].message, '(cli)')
     steps:
       - run: echo '${{ toJSON(github) }}'
 

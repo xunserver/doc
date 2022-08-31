@@ -14,5 +14,11 @@ jobs:
     steps:
       - run: echo '${{ toJSON(github) }}'
 
+      - run: cd package/cli
+
+      - run: npm i 
+
+      - run: npm run pub
+
 
 

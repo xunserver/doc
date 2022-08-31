@@ -34,6 +34,6 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "pub": "npm run build & node build/publish"
+    "pub": "npm run build && node build/publish"
   }
 }

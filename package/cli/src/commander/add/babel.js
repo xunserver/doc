@@ -11,7 +11,7 @@ export const babelAction = async (option) => {
   const answer = await inquirer.prompt([
     {
       type: 'rawlist',
-      name: 'framework',
+      name: 'type',
       message: 'vue、react还是通用开发',
       default: 'common',
       choices: [
@@ -36,7 +36,7 @@ export const babelAction = async (option) => {
  
   // 通过添加配置文件
   renderAndOutput(resolve(__dirname, `./template/${configFileName.substring(1)}`), configFileName, {
-    type: answer.framework === 'recommended' ? '' : answer.framework,
+    type: answer.type === 'recommended' ? '' : answer.type,
     typescript: answer.typescript
   })
 }

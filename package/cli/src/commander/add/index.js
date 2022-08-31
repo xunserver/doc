@@ -1,23 +1,13 @@
 import { program, Argument } from "commander"
 import { lintAction } from "./lint";
 import { babelAction } from "./babel";
-
-
-// 下载
-function downloadLintConfig() {
-
-}
-
-// 根据配置名加载配置
-function loadByConfig() {
-
-}
+import { postcssAction } from "./postcss";
 
 program
   .command("add")
   .alias("a")
   .description("添加项目功能")
-  .addArgument(new Argument('<type>', '添加组件分类').choices(['lint', 'babel']))
+  .addArgument(new Argument('<type>', '添加组件分类').choices(['lint', 'babel', 'postcss']))
   .option(
     "-C, --config [config]",
     "采用设定的配置",
@@ -39,5 +29,7 @@ program
         return lintAction(option)
       case 'babel':
         return babelAction(option)
+      case 'postcss':
+          return postcssAction(option)
     }
   });

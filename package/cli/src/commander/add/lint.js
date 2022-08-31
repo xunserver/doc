@@ -24,8 +24,9 @@ const createConfigFile = ({
     }
 
     const renderContext = renderData();
+    renderContext.type = answer.type;
     if (answer.typescript) {
-      renderContext.type = answer.framework + "-ts";
+      renderContext.type = answer.type + "-ts";
     }
 
     // 通过添加配置文件
@@ -42,34 +43,15 @@ const addEslint = createConfigFile({
   configFileName: '.eslintrc.js'
 }) 
 
-const addStylelint = async function (answer, context) {
-  shelljs.exec("npm i -D @xunserver/stylelint-config");
+const addStylelint = createConfigFile({
+  packageName: '@xunserver/stylelint-config',
+  configFileName: '.stylelintrc.js'
+})
 
-  const configFileName = ".stylelintrc.js";
-  shelljs.cp(configFileName, `${configFileName}.bak`);
-
-  let type = answer.framework;
-
-  // 通过添加配置文件
-  renderAndOutput(
-    resolve(__dirname, `./template/${configFileName.substring(1)}`),
-    configFileName,
-    { type }
-  );
-};
-
-const addPrettier = async function (answer, context) {
-  shelljs.exec("npm i -D @xunserver/prettier-config");
-
-  const configFileName = ".prettierrc.js";
-  shelljs.cp(configFileName, `${configFileName}.bak`);
-  // 通过添加配置文件
-  renderAndOutput(
-    resolve(__dirname, `./template/${configFileName.substring(1)}`),
-    configFileName,
-    {}
-  );
-};
+const addPrettier = createConfigFile({
+  packageName: '@xunserver/prettier-config',
+  configFileName: '.prettierrc.js'
+})
 
 const addEditorconfig = async function () {
   shelljs.exec("npm i -D @xunserver/vscode-config");
@@ -80,19 +62,10 @@ const addEditorconfig = async function () {
   );
 };
 
-const addCommitlint = async function (answer) {
-  shelljs.exec("npm i -D @xunserver/prettier-config");
-
-  const configFileName = ".commitlintrc.js";
-  shelljs.cp(configFileName, `${configFileName}.bak`);
-
-  // 通过添加配置文件
-  renderAndOutput(
-    resolve(__dirname, `./template/${configFileName.substring(1)}`),
-    configFileName,
-    {}
-  );
-};
+const addCommitlint = createConfigFile({
+  packageName: '@xunserver/commitlint-config',
+  configFileName: '.commitlintrc.js'
+})
 
 const actionMaps = {
   eslint: addEslint,
@@ -106,7 +79,7 @@ export const lintAction = async (option) => {
   const answer = await inquirer.prompt([
     {
       type: "rawlist",
-      name: "framework",
+      name: "type",
       message: "vue、react还是通用开发",
       default: "common",
       choices: ["vue", "vu3", "react", "recommended"],

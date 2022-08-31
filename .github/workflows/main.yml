@@ -23,7 +23,7 @@ jobs:
 
       - run: cd package/cli && npm i
 
-      - run: npm run pub
+      - run: cd package/cli && npm run pub
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 

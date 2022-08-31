@@ -12,13 +12,20 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.event.commits[0].message, '(cli)')
     steps:
-      - run: echo '${{ toJSON(github) }}'
+      - name: pull code
+        uses: actions/checkout@master
 
-      - run: cd package/cli
+      - name: node and npm
+        uses: actions/setup-node
+        with:
+          node-version: '18.x'
+          cache: 'npm'
 
-      - run: npm i 
+      - run: cd package/cli && npm i
 
       - run: npm run pub
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
 
 

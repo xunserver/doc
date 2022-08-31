@@ -1,16 +1,6 @@
 const shelljs = require('shelljs');
 
-const checkIsPub = () => {
-    const commitMessage = shelljs.exec('git log -1 --pretty=%B').toString();
-    return commitMessage.includes("[pub]");
-}
-
 async function main() {
-    // 判断是否需要pub,根据是否存在[pub]前缀决定是否发版
-    if(!await checkIsPub()) {
-        return
-    }
-
     // 版本+1
     shelljs.exec('npm version patch');
 

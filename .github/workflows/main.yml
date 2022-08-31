@@ -10,7 +10,7 @@ on:
 jobs:
   publish_npm_for_cli:
     runs-on: ubuntu-latest
-    if: contains(github.event.commits[0].message, '(cli)')
+    if: contains(github.event.commits[0].message, '(cli)') && contains(github.event.commits[0].message, '[pub]')
     steps:
       - name: pull code
         uses: actions/checkout@master

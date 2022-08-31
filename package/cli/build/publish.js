@@ -2,7 +2,7 @@ const shelljs = require('shelljs');
 
 const checkIsPub = () => {
     const commitMessage = shelljs.exec('git log -1 --pretty=%B').toString();
-    return commitMessage.startsWith("[pub]");
+    return commitMessage.includes("[pub]");
 }
 
 async function main() {

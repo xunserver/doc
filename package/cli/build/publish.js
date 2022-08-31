@@ -18,7 +18,7 @@ async function main() {
     shelljs.exec('npm publish --access public');
 
     // 更新git
-    shelljs.exec('git add -A');
+    shelljs.exec('git add package/cli/package.json');
     const packageJson = require('../package.json')
     shelljs.exec(`git commit -m "${packageJson.version}"`);
     shelljs.exec(`git push origin main`);

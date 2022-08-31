@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: node and npm
-        uses: actions/setup-node
+        uses: actions/setup-node@master
         with:
           node-version: '18.x'
           cache: 'npm'

@@ -1,5 +1,8 @@
 const { resolve, relative} = require('path');
-const fs= require('fs');
+const fs = require('fs');
+const shelljs = require('shelljs')
+
+shelljs.rm('-rf', './dist')
 
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');

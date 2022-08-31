@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/index.css",
   "scripts": {
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js && npm run clean",
+    "clean": "node clean.js"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "mini-css-extract-plugin": "^2.6.1",
     "postcss": "^8.4.16",
     "postcss-loader": "^7.0.1",
+    "shelljs": "^0.8.5",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
   }

@@ -24,7 +24,6 @@ export const publishPackage = (baseDir, option) => {
 
   shelljs.exec("npm version patch"); // 更新patch版本号
   ignoreError(() => shelljs.exec("npm run build")); // 更新patch版本号
-  shelljs.exec("npm run build"); // 更新patch版本号
   shelljs.exec(
     "npm publish --access public --registry='https://registry.npmjs.org/'"
   ); // 发布npm仓库
@@ -34,7 +33,7 @@ export const publishPackage = (baseDir, option) => {
 
     packageJson = jsonfile.readFileSync(resolve(baseDir, "package.json"));
     shelljs.exec(`git commit -m '${packageJson.version}'`); // 发布npm仓库
-    shelljs.exec(`git push ${option.branch}`); // 发布npm仓库
+    shelljs.exec(`git push ${option.remote} ${option.branch}`); // 发布npm仓库
   }
 };
 
@@ -43,6 +42,7 @@ program
   .alias("p")
   .description("发布npm仓库")
   .option("-G, --git", "是否自动发布git", true)
+  .option("-R, --remote", "发布的git仓库名称", 'origin')
   .option("-B, --branch [branch]", "git 分支名称", "main")
   .action((option) => {
     publishPackage(rootDir, option);

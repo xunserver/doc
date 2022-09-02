@@ -52,9 +52,16 @@ Inquirer.prompt([
   },
   {
     type: "input",
+    name: "remote",
+    when: (answer) => answer.git,
+    message: "需要更新的仓库",
+    default: 'origin'
+  },
+  {
+    type: "input",
     name: "branch",
     when: (answer) => answer.git,
-    message: "需要更新的峰值",
+    message: "需要更新的分支",
     default: 'main'
   },
 ]).then((answer) => {

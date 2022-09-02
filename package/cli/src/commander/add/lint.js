@@ -23,11 +23,16 @@ const createConfigFile = ({
       shelljs.cp(configFileName, `${configFileName}.bak`);
     }
 
-    const renderContext = renderData();
+    let renderContext = {};
     renderContext.type = answer.type;
     if (answer.typescript) {
       renderContext.type = answer.type + "-ts";
     }
+    renderContext = {
+      ...renderContext,
+      ...renderData(answer, renderContext, context)
+    }
+    
 
     // 通过添加配置文件
     renderAndOutput(
@@ -45,7 +50,12 @@ const addEslint = createConfigFile({
 
 const addStylelint = createConfigFile({
   packageName: '@xunserver/stylelint-config',
-  configFileName: '.stylelintrc.js'
+  configFileName: '.stylelintrc.js',
+  renderData(answer) {
+    return {
+      type: answer.type
+    }
+  }
 })
 
 const addPrettier = createConfigFile({
@@ -82,7 +92,7 @@ export const lintAction = async (option) => {
       name: "type",
       message: "vue、react还是通用开发",
       default: "common",
-      choices: ["vue", "vu3", "react", "recommended"],
+      choices: ["vue", "vue2", "react", "recommended"],
     },
     {
       type: "confirm",

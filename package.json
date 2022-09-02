@@ -4,11 +4,12 @@
   "description": "xuncool 仓库合集",
   "main": "index.js",
   "scripts": {
-    "pub": "node build/publish"
+    "pub": "node build/publish.mjs"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "type": "module",
   "devDependencies": {
     "inquirer": "9.1.0",
     "jsonfile": "^6.1.0",

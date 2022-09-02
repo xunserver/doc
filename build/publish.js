@@ -1,19 +1,8 @@
 import Inquirer from "inquirer";
 import fs from "fs";
 import { resolve } from "path";
-import jsonfile from "jsonfile";
-import shelljs from "shelljs";
-import { publishPackage } from "../package/cli/src/commander/pub";
 
 const rootDir = process.cwd();
-
-const ignoreError = (fn) => {
-  try {
-    fn();
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 const getPackageNames = () => {
   const packages = fs.readdirSync(resolve(rootDir, "./package"));
@@ -22,6 +11,30 @@ const getPackageNames = () => {
   return packages.filter((subPackage) =>
     fs.existsSync(resolve(rootDir, "package", subPackage, "package.json"))
   );
+};
+
+const publishPackage = (baseDir, option) => {
+  shelljs.config.fatal = true;
+  shelljs.cd(baseDir);
+  let packageJson = jsonfile.readFileSync(resolve(baseDir, "package.json"));
+  if (packageJson.scripts?.pub) {
+    return shelljs.exec("npm run pub");
+  }
+
+  shelljs.exec("npm version patch"); // 更新patch版本号
+  ignoreError(() => shelljs.exec("npm run build")); // 更新patch版本号
+  shelljs.exec("npm run build"); // 更新patch版本号
+  shelljs.exec(
+    "npm publish --access public --registry='https://registry.npmjs.org/'"
+  ); // 发布npm仓库
+
+  if (option.git) {
+    shelljs.exec("git add package.json"); // 发布npm仓库
+
+    packageJson = jsonfile.readFileSync(resolve(baseDir, "package.json"));
+    shelljs.exec(`git commit -m '${packageJson.version}'`); // 发布npm仓库
+    shelljs.exec(`git push ${option.branch}`); // 发布npm仓库
+  }
 };
 
 Inquirer.prompt([

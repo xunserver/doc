@@ -2,7 +2,7 @@ module.exports = {
     extends: ['./css.js', 'stylelint-config-recommended-less'],
     overrides: [
         {
-          files: ["**/*.less"],
+          files: ["*.less"],
           customSyntax: "postcss-less",
         },
     ],

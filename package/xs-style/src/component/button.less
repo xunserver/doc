@@ -1,11 +1,22 @@
 @btn-prefix-cls: ~"@{app-prefix}-btn";
 
+.btn-sizes(@padding; @font-size; @border-radius ) {
+    padding: @padding;
+    border-radius: @border-radius;
+    font-size: @font-size;
+}
+
 // 基础css样式
 .btn() {
     display: inline-block;
     margin-bottom: 0;
+    background-image: none;
+    cursor: pointer;
+    line-height: @line-height-base;
     text-align: center;
+    user-select: none;
     vertical-align: middle;
+    white-space: nowrap;
 }
 
 // 默认 button

@@ -4,12 +4,14 @@
   "description": "xuncool 仓库合集",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pub": "node build/publish"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "inquirer": "9.1.0",
+    "jsonfile": "^6.1.0",
     "shelljs": "^0.8.5"
   }
 }

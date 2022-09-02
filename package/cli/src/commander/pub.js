@@ -42,7 +42,7 @@ program
   .alias("p")
   .description("发布npm仓库")
   .option("-G, --git", "是否自动发布git", true)
-  .option("-R, --remote", "发布的git仓库名称", 'origin')
+  .option("-R, --remote [remote]", "发布的git仓库名称", 'origin')
   .option("-B, --branch [branch]", "git 分支名称", "main")
   .action((option) => {
     publishPackage(rootDir, option);

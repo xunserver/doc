@@ -1,6 +1,6 @@
 {
   "name": "@xunserver/eslint-config",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "description": "xunserver's lint configure",
   "main": "index.js",
   "scripts": {

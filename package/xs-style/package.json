@@ -1,10 +1,11 @@
 {
   "name": "@xunserver/xs-style",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "",
   "main": "dist/index.css",
   "scripts": {
     "build": "webpack --config webpack.config.js && npm run clean",
+    "pub": "npm run build && node publish.js",
     "clean": "node clean.js"
   },
   "keywords": [],
@@ -20,5 +21,10 @@
     "shelljs": "^0.8.5",
     "webpack": "^5.74.0",
     "webpack-cli": "^4.10.0"
-  }
+  },
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ]
 }

@@ -1,6 +1,9 @@
 import Inquirer from "inquirer";
 import fs from "fs";
 import { resolve } from "path";
+import jsonfile from "jsonfile";
+import shelljs from "shelljs";
+
 
 const rootDir = process.cwd();
 

@@ -1,5 +1,5 @@
 {
-  "name": "@xunserver/xs-style",
+  "name": "@xunserver/style",
   "version": "0.0.1",
   "description": "",
   "main": "dist/index.css",

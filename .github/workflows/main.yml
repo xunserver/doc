@@ -30,6 +30,28 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
+  publish_ui:
+    runs-on: ubuntu-latest
+    if: contains(github.event.commits[0].message, '(ui)') && contains(github.event.commits[0].message, '[pub]')
+    steps:
+      - name: pull code
+        uses: actions/checkout@master
+
+      - name: node and npm
+        uses: actions/setup-node@master
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: cd package/ui && npm i
+
+      - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
+
+      - run: cd package/ui && npm run pub
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
+
   publish_style:
     runs-on: ubuntu-latest
     if: contains(github.event.commits[0].message, '(style)') && contains(github.event.commits[0].message, '[pub]')
@@ -44,11 +66,11 @@ jobs:
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
 
-      - run: cd package/xs-style && npm i
+      - run: cd package/style && npm i
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 
-      - run: cd package/xs-style && npm run pub
+      - run: cd package/style && npm run pub
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 

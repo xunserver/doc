@@ -1,27 +1,127 @@
-@btn-prefix-cls: ~'@{app-prefix}-btn';
-
-.btn-sizes(@padding; @font-size; @border-radius ) {
+.btn-size(@padding; @font-size; @radius ) {
   padding: @padding;
-  border-radius: @border-radius;
+  border-radius: @radius;
   font-size: @font-size;
+}
+
+.btn-color(@color; @background; @border) {
+  border-color: @border;
+  background-color: @background;
+  color: @color;
+}
+
+.button-color-variant(@color; @background; @border) {
+  .btn-color(@color; @background; @border);
+
+  &:hover,
+  &:focus {
+    .btn-color(tint(@color, 20%); tint(@background, 20%); tint(@border, 20%))
+  }
+
+  &:active,
+  &.active {
+    .btn-color(shade(@color, 5%); shade(@background, 5%); shade(@border, 5%))
+  }
+
+  &:disabled,
+  &.disabled,
+  &[disabled] {
+    &,
+    &:hover,
+    &:active,
+    &.active,
+    &:focus {
+      .btn-color(@btn-disable-color; @btn-disable-background-color; @btn-disable-border-color)
+    }
+  }
 }
 
 // 基础css样式
 .btn() {
   display: inline-block;
+  border: 1px solid transparent;
   margin-bottom: 0;
   background-image: none;
   cursor: pointer;
-  line-height: @line-height-base;
+  font-weight: @btn-font-weight;
+  line-height: @line-height;
   text-align: center;
+  transition: color, background-color, border, box-shadow @transition-time linear;
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  .btn-size(@btn-padding; @btn-font-size; @btn-radius);
+
+  > span {
+    vertical-align: middle;  // vertical-align 不会自动继承，需要手动设置
+  }
+
+  > .@{icon-prefix-cls} {
+    line-height: @line-height;
+    vertical-align: middle;
+  }
+
+  &,
+  &:active,
+  &:hover {
+    outline: 0;
+  }
+
+  &.disabled,
+  &:disabled,
+  &[disabled] {
+    cursor: @cursor-disabled;
+    pointer-events: none;
+    > * {
+      pointer-events: none;
+    }
+  }
+
+  &-large {
+    .btn-size(@btn-padding-large, @btn-font-size-large, @btn-radius-large);
+  }
+
+  &-small {
+    .btn-size(@btn-padding-small, @btn-font-size-small, @btn-radius-small);
+  }
+
+  @icon-only-sizes: small, large;
+
+  each(@icon-only-sizes, {
+    &-@{value} {
+      @padding: ~"btn-padding-@{value}";
+      @font-size: ~"btn-font-size-@{value}";
+      @radius: ~"btn-radius-@{value}";
+      .btn-size(@btn-padding-large, @btn-font-size-large, @btn-radius-large);
+    }
+
+    &-icon-only&@{value} {
+      @padding: ~"btn-padding-icon-@{value}";
+      @font-size: ~"btn-font-size-icon-@{value}";
+      @radius: ~"btn-radius-icon-@{value}";
+      .btn-size(@@padding, @@font-size, @@radius);
+    }
+
+    
+  })
+
+  &-icon-only&-small {
+    // .btn-size(@btn-padding-icon, @font-size, @border-radius)
+  }
+
+  &-icon-only&-small {
+    // .btn-size(@btn-padding-icon, @font-size, @border-radius)
+  }
+
+  // 单icon时
+  &-icon-only&-circle > .@{icon-prefix-cls} {
+    vertical-align: baseline;
+  }
 }
 
 // 默认 button
 .btn-default() {
-  color: test;
+  .button-color-variant(@btn-default-color, @btn-default-background-color, @btn-default-border-color)
 }
 
 .@{btn-prefix-cls} {

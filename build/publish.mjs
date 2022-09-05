@@ -33,7 +33,6 @@ const publishPackage = (baseDir, option) => {
 
   shelljs.exec("npm version patch"); // 更新patch版本号
   ignoreError(() => shelljs.exec("npm run build")); // 更新patch版本号
-  shelljs.exec("npm run build"); // 更新patch版本号
   shelljs.exec(
     "npm publish --access public --registry='https://registry.npmjs.org/'"
   ); // 发布npm仓库

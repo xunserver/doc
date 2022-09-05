@@ -4,8 +4,15 @@ import { resolve } from "path";
 import jsonfile from "jsonfile";
 import shelljs from "shelljs";
 
-
 const rootDir = process.cwd();
+
+const ignoreError = (fn) => {
+  try {
+    fn();
+  } catch (err) {
+    console.error(err);
+  }
+};
 
 const getPackageNames = () => {
   const packages = fs.readdirSync(resolve(rootDir, "./package"));
@@ -51,24 +58,24 @@ Inquirer.prompt([
     type: "confirm",
     name: "git",
     message: "是否需要更新git",
-    default: true
+    default: true,
   },
   {
     type: "input",
     name: "remote",
     when: (answer) => answer.git,
     message: "需要更新的仓库",
-    default: 'origin'
+    default: "origin",
   },
   {
     type: "input",
     name: "branch",
     when: (answer) => answer.git,
     message: "需要更新的分支",
-    default: 'main'
+    default: "main",
   },
 ]).then((answer) => {
   answer.packages.forEach((subPackage) => {
-    publishPackage(resolve(rootDir, 'package', subPackage), answer)
+    publishPackage(resolve(rootDir, "package", subPackage), answer);
   });
 });

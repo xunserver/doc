@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@xunserver/eslint-config": "^0.0.7",
+    "@xunserver/prettier-config": "^0.0.2",
+    "@xunserver/vscode-config": "^0.0.1"
+  }
 }

@@ -14,5 +14,8 @@
     "inquirer": "9.1.0",
     "jsonfile": "^6.1.0",
     "shelljs": "^0.8.5"
+  },
+  "dependencies": {
+    "@xunserver/style": "^0.0.1"
   }
 }

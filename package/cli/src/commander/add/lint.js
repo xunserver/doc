@@ -2,7 +2,7 @@ import shelljs from "shelljs";
 import { resolve, dirname } from "path";
 import { fileURLToPath } from "url";
 import inquirer from "inquirer";
-import { sequenceIterate } from "../../utils/common";
+import { ignoreError, sequenceIterate } from "../../utils/common";
 import { renderAndOutput } from "../../utils/render";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -19,8 +19,8 @@ const createConfigFile = ({
     shelljs.exec(`npm i ${saveDev ? "-D" : ""} ${packageName}`);
 
     if (!answer.isOverride) {
-      // 辈分本地的.eslintrc.js
-      shelljs.cp(configFileName, `${configFileName}.bak`);
+      // 备份本地的.eslintrc.js
+      ignoreError(() => shelljs.cp(configFileName, `${configFileName}.bak`));
     }
 
     let renderContext = {};
@@ -30,9 +30,8 @@ const createConfigFile = ({
     }
     renderContext = {
       ...renderContext,
-      ...renderData(answer, renderContext, context)
-    }
-    
+      ...renderData(answer, renderContext, context),
+    };
 
     // 通过添加配置文件
     renderAndOutput(
@@ -44,28 +43,28 @@ const createConfigFile = ({
 };
 
 const addEslint = createConfigFile({
-  packageName: '@xunserver/eslint-config',
-  configFileName: '.eslintrc.js'
-}) 
+  packageName: "@xunserver/eslint-config",
+  configFileName: ".eslintrc.js",
+});
 
 const addStylelint = createConfigFile({
-  packageName: '@xunserver/stylelint-config',
-  configFileName: '.stylelintrc.js',
+  packageName: "@xunserver/stylelint-config",
+  configFileName: ".stylelintrc.js",
   renderData(answer) {
     return {
-      type: answer.type
-    }
-  }
-})
+      type: answer.type,
+    };
+  },
+});
 
 const addPrettier = createConfigFile({
-  packageName: '@xunserver/prettier-config',
-  configFileName: '.prettierrc.js'
-})
+  packageName: "@xunserver/prettier-config",
+  configFileName: ".prettierrc.js",
+});
 
 const addEditorconfig = async function () {
-  shelljs.exec("npm i -D @xunserver/vscode-config");
-  shelljs.cp(".editorconfig", ".editorconfig.bak");
+  shelljs.exec("npm i @xunserver/vscode-config");
+  ignoreError(() => shelljs.cp(".editorconfig", ".editorconfig.bak"));
   shelljs.cp(
     "node_modules/@xunserver/vscode-config/.editorconfig",
     ".editorconfig"
@@ -73,9 +72,9 @@ const addEditorconfig = async function () {
 };
 
 const addCommitlint = createConfigFile({
-  packageName: '@xunserver/commitlint-config',
-  configFileName: '.commitlintrc.js'
-})
+  packageName: "@xunserver/commitlint-config",
+  configFileName: ".commitlintrc.js",
+});
 
 const actionMaps = {
   eslint: addEslint,

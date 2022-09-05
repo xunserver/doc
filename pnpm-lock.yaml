@@ -1,16 +1,15 @@
 lockfileVersion: 5.4
 
-importers:
+specifiers:
+  '@xunserver/style': ^0.0.1
+  inquirer: 9.1.0
+  jsonfile: ^6.1.0
+  shelljs: ^0.8.5
 
-  .:
-    specifiers:
-      inquirer: 9.1.0
-      jsonfile: ^6.1.0
-      shelljs: ^0.8.5
-    devDependencies:
-      inquirer: 9.1.0
-      jsonfile: 6.1.0
-      shelljs: 0.8.5
+devDependencies:
+  inquirer: 9.1.0
+  jsonfile: 6.1.0
+  shelljs: 0.8.5
 
 packages:
 

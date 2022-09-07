@@ -25,7 +25,6 @@ module.exports = {
   output: {
     path: resolve(__dirname, 'dist'),
   },
-  watch: true,
   module: {
     rules: [
       {

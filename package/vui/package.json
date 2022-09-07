@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": ""
+    "build": "rollup -c"
   },
   "keywords": [],
   "author": "",
@@ -12,6 +12,7 @@
   "devDependencies": {
     "@xunserver/eslint-config": "^0.0.7",
     "@xunserver/prettier-config": "^0.0.2",
+    "@xunserver/style": "workspace:^0.0.1",
     "@xunserver/vscode-config": "^0.0.1"
   }
 }

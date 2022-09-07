@@ -1,3 +1,4 @@
 module.exports = {
-    extends: ['@xunserver/eslint-config/vue-ts']
+  parser: 'espree',
+  extends: ['@xunserver/eslint-config/vue-ts'],
 }

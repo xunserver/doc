@@ -11,9 +11,17 @@
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@rollup/plugin-typescript": "^8.5.0",
+    "@vitejs/plugin-vue": "^3.1.0",
+    "@vue/compiler-sfc": "^3.2.38",
     "inquirer": "9.1.0",
     "jsonfile": "^6.1.0",
-    "shelljs": "^0.8.5"
+    "rollup": "2.77.2",
+    "shelljs": "^0.8.5",
+    "tslib": "^2.4.0",
+    "typescript": "^4.8.2",
+    "vite": "^3.1.0",
+    "vue": "^3.2.38"
   },
   "dependencies": {
     "@xunserver/style": "^0.0.1"

@@ -1,4 +1,8 @@
-export * from './component/index'
-export * from './service/index'
+// export * from './service'
+// export * from './component'
 
-interface test {}
+// import component from './component'
+
+// export default component
+
+const a = 123

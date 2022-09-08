@@ -1,8 +1,8 @@
 <template>
-  <button :class="buttonCls"></button>
+  <button :class="buttonCls"><slot /></button>
 </template>
 <script setup lang="ts">
-import { defineProps, reactive } from 'vue'
+import { reactive } from 'vue'
 interface ButtonProps {
   long: boolean
   round: boolean
@@ -16,13 +16,13 @@ const { type, long, round, circle, loading, size } = defineProps<ButtonProps>()
 const addBtnPrefix = (cls = '') => `xs-btn${cls}`
 const buttonCls = reactive([
   addBtnPrefix(),
-  addBtnPrefix(type ? type : 'default'),
+  addBtnPrefix('-' + (type ? type : 'default')),
   {
     [addBtnPrefix('-long')]: long,
     [addBtnPrefix('-round')]: round,
     [addBtnPrefix('-circle')]: circle,
     [addBtnPrefix('-loading')]: loading,
-    [addBtnPrefix('-size')]: size,
   },
+  addBtnPrefix(size === 'middle' ? '' : '-' + size),
 ])
 </script>

@@ -6,4 +6,4 @@ const install = (app, options) => {
 }
 
 export { Button }
-export default install
+export default { install }

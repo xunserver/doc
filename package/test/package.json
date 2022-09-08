@@ -1,0 +1,15 @@
+{
+  "name": "@xunserver/test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@xunserver/vui": "workspace:^0.0.1"
+  }
+}

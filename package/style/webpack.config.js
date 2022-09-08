@@ -45,7 +45,7 @@ module.exports = {
               additionalData: (fileContent, loaderContext) => {
                 const { resourcePath, rootContext } = loaderContext
                 const relativePath = relative(rootContext, resourcePath)
-                if (relativePath.includes('/component/')) {
+                if (relativePath.includes('component')) {
                   return `@import '../common'; ${fileContent}`
                 }
 

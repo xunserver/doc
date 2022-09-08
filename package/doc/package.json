@@ -4,9 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vitepress dev doc",
+    "build": "vitepress build doc",
+    "serve": "vitepress serve doc"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@xunserver/vui": "workspace:^0.0.1",
+    "vitepress": "1.0.0-alpha.13"
+  }
 }

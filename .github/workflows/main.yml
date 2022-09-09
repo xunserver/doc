@@ -134,6 +134,8 @@ jobs:
           mv ./** ~/temp/doc
           cd ~/temp/doc
           git init
+          git config --local user.email "bot@auto.xunserver.cn" 
+          git config --local user.name "bot"
           git add --all
           git commit -m "auto deploy"
           git remote add upstream $GITEE_GIT_ADDR

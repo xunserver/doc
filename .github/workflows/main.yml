@@ -109,7 +109,7 @@ jobs:
           external_repository: xuncool/doc
           publish_branch: main
           publish_dir: ./package/doc/dist
-          # cname: ${{ secrets.CNAME }}
+          cname: ${{ secrets.CNAME }}
 
   deploy-gitee:
     needs: deploy_doc
@@ -130,6 +130,11 @@ jobs:
           echo "${{ secrets.GITEE_PRIVATE_KEY }}" > "$SSHPATH/id_rsa"
           chmod 600 "$SSHPATH/id_rsa"
           sudo sh -c "echo StrictHostKeyChecking no >>/etc/ssh/ssh_config"
+          mkdir -p ~/temp/doc
+          mv ./** ~/temp/doc
+          cd ~/temp/doc
+          git add --all
+          git commit -m "auto deploy"
           git remote add upstream $GITEE_GIT_ADDR
           git push upstream --all --force
 

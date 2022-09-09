@@ -132,7 +132,7 @@ jobs:
           sudo sh -c "echo StrictHostKeyChecking no >>/etc/ssh/ssh_config"
           mkdir -p ~/temp/doc
           mv ./** ~/temp/doc
-          cd ~/temp/doc
+          cd ~/temp/
           git init
           git config --local user.email "bot@auto.xunserver.cn" 
           git config --local user.name "bot"

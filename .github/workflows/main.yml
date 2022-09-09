@@ -141,7 +141,7 @@ jobs:
         with:
           deploy_key: ${{ secrets.GITEE_PRIVATE_KEY }} # 和gitee的使用一个
           external_repository: xuncool/doc
-          publish_branch: main
+          publish_branch: doc
           publish_dir: ./package/doc/dist
           cname: ${{ secrets.CNAME }}
 

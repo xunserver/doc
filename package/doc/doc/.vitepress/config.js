@@ -1,7 +1,7 @@
 import { defineConfig } from "vitepress";
 
 export default defineConfig({
-  outDir: "./dist",
+  outDir: "../dist",
   themeConfig: {
     siteTitle: "xunserver",
     nav: [

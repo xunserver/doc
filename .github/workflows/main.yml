@@ -79,6 +79,7 @@ jobs:
   # doc
   deploy_doc:
     runs-on: ubuntu-latest
+    if: contains(github.event.commits[0].message, '(doc)')
     steps:
       - name: pull code
         uses: actions/checkout@master
@@ -111,8 +112,7 @@ jobs:
           # cname: ${{ secrets.CNAME }}
 
   deploy-gitee:
-    needs: deploy_doc
-    if: contains(github.event.commits[0].message, '(doc123)')
+    # needs: deploy_doc
     runs-on: ubuntu-latest
     steps:
       - name: pull code

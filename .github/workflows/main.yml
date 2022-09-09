@@ -79,7 +79,6 @@ jobs:
   # doc
   deploy_doc:
     runs-on: ubuntu-latest
-    if: contains(github.event.commits[0].message, '(doc)')
     steps:
       - name: pull code
         uses: actions/checkout@master

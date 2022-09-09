@@ -166,7 +166,7 @@ jobs:
           sudo sh -c "echo StrictHostKeyChecking no >>/etc/ssh/ssh_config"
           git checkout doc
           git remote add upstream $GITEE_GIT_ADDR
-          git push upstream --all --force
+          git push upstream doc main --force
 
       - name: Build Gitee Pages
         uses: yanglbme/gitee-pages-action@main

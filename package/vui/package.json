@@ -11,12 +11,9 @@
   "license": "ISC",
   "devDependencies": {
     "@xunserver/style": "workspace:^0.0.1",
-    "vite-plugin-dts": "^1.4.1"
-  },
-  "dependencies": {
     "@xunserver/eslint-config": "workspace:^0.0.7",
     "@xunserver/prettier-config": "workspace:^0.0.2",
-    "@xunserver/vui": "^0.0.1"
+    "vite-plugin-dts": "^1.4.1"
   },
   "main": "./dist/cjs/index.js",
   "module": "./dist/es/index.js",

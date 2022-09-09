@@ -29,6 +29,6 @@
     "@xunserver/prettier-config": "^0.0.2",
     "@xunserver/style": "^0.0.1",
     "@xunserver/stylelint-config": "^0.0.7",
-    "@xunserver/vui": "^0.0.0"
+    "@xunserver/vui": "^0.0.1"
   }
 }

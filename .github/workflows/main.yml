@@ -116,7 +116,7 @@ jobs:
       - name: deploy github
         uses: peaceiris/actions-gh-pages@v3
         with:
-          deploy_key: ${{ secrets.GITEE_PRIVATE_KEY }} # 和gitee的使用一个
+          # deploy_key: ${{ secrets.GITEE_PRIVATE_KEY }} # 和gitee的使用一个
           external_repository: xuncool/doc
           publish_branch: doc
           publish_dir: ./package/doc/dist

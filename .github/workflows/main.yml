@@ -133,6 +133,7 @@ jobs:
           mkdir -p ~/temp/doc
           mv ./** ~/temp/doc
           cd ~/temp/doc
+          git init
           git add --all
           git commit -m "auto deploy"
           git remote add upstream $GITEE_GIT_ADDR

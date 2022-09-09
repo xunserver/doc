@@ -112,7 +112,7 @@ jobs:
           # cname: ${{ secrets.CNAME }}
 
   deploy-gitee:
-    # needs: deploy_doc
+    needs: deploy_doc
     runs-on: ubuntu-latest
     steps:
       - name: pull code

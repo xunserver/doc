@@ -100,7 +100,7 @@ jobs:
 
       - run: pnpm -F @xunserver/vui run build
 
-      - run: pnpm -F @xunserver/doc run  build
+      - run: pnpm -F @xunserver/doc run build
 
       - name: deploy github
         uses: peaceiris/actions-gh-pages@v3
@@ -108,6 +108,17 @@ jobs:
           deploy_key: ${{ secrets.GITEE_PRIVATE_KEY }} # 和gitee的使用一个
           external_repository: xuncool/doc
           publish_branch: main
+          publish_dir: ./package/doc/dist
+          cname: ${{ secrets.CNAME }}
+
+      - run: pnpm -F @xunserver/doc run build:doc
+
+      - name: deploy github
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.GITEE_PRIVATE_KEY }} # 和gitee的使用一个
+          external_repository: xuncool/doc
+          publish_branch: doc
           publish_dir: ./package/doc/dist
           cname: ${{ secrets.CNAME }}
 
@@ -130,17 +141,7 @@ jobs:
           echo "${{ secrets.GITEE_PRIVATE_KEY }}" > "$SSHPATH/id_rsa"
           chmod 600 "$SSHPATH/id_rsa"
           sudo sh -c "echo StrictHostKeyChecking no >>/etc/ssh/ssh_config"
-          mkdir -p ~/temp/doc
-          mv ./** ~/temp/doc
-          cd ~/temp/
-          git init
-          git config --local user.email "bot@auto.xunserver.cn" 
-          git config --local user.name "bot"
-          git checkout -b main
-          pwd 
-          ls -l
-          git add --all
-          git commit -m "auto deploy"
+          git checkout doc
           git remote add upstream $GITEE_GIT_ADDR
           git push upstream --all --force
 

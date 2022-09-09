@@ -100,7 +100,7 @@ jobs:
 
       - run: pnpm -F @xunserver/vui run build
 
-      - run: pnpm -F @xunserver/doc run build
+      - run: pnpm -F @xunserver/doc run  build
 
       - name: deploy github
         uses: peaceiris/actions-gh-pages@v3

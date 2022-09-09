@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import dts from 'vite-plugin-dts'
 
 export default defineConfig({
-  // root: './src',
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    dts({
+      outputDir: 'dist/es',
+    }),
+  ],
   publicDir: './src/public',
   resolve: {
     alias: {
@@ -25,10 +30,19 @@ export default defineConfig({
       output: [
         {
           format: 'es',
-          entryFileNames: '[name].es.js',
+          entryFileNames: 'index.js',
           dir: 'dist/es',
         },
+        {
+          format: 'cjs',
+          entryFileNames: 'index.js',
+          dir: 'dist/cjs',
+        },
       ],
+    },
+    lib: {
+      entry: './src/index.ts',
+      formats: ['es', 'cjs'],
     },
   },
 })

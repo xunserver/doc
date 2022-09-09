@@ -8,6 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
+  # cli
   publish_cli:
     runs-on: ubuntu-latest
     if: contains(github.event.commits[0].message, '(cli)') && contains(github.event.commits[0].message, '[pub]')
@@ -18,9 +19,9 @@ jobs:
       - name: node and npm
         uses: actions/setup-node@master
         with:
-          node-version: '18.x'
-          cache: 'npm'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "18.x"
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
 
       - run: cd package/cli && npm i
 
@@ -29,10 +30,10 @@ jobs:
       - run: cd package/cli && npm run pub
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
-
-  publish_ui:
+  # vui
+  publish_vui:
     runs-on: ubuntu-latest
-    if: contains(github.event.commits[0].message, '(ui)') && contains(github.event.commits[0].message, '[pub]')
+    if: contains(github.event.commits[0].message, '(vui)') && contains(github.event.commits[0].message, '[pub]')
     steps:
       - name: pull code
         uses: actions/checkout@master
@@ -40,18 +41,19 @@ jobs:
       - name: node and npm
         uses: actions/setup-node@master
         with:
-          node-version: '18.x'
-          cache: 'npm'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "18.x"
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
 
-      - run: cd package/ui && npm i
+      - run: cd package/vui && npm i
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 
-      - run: cd package/ui && npm run pub
+      - run: cd package/vui && npm run pub
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
+  # style
   publish_style:
     runs-on: ubuntu-latest
     if: contains(github.event.commits[0].message, '(style)') && contains(github.event.commits[0].message, '[pub]')
@@ -62,9 +64,9 @@ jobs:
       - name: node and npm
         uses: actions/setup-node@master
         with:
-          node-version: '18.x'
-          cache: 'npm'
-          registry-url: 'https://registry.npmjs.org'
+          node-version: "18.x"
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
 
       - run: cd package/style && npm i
 
@@ -74,5 +76,65 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
+  # doc
+  deploy_doc:
+    runs-on: ubuntu-latest
+    if: contains(github.event.commits[0].message, '(doc)')
+    steps:
+      - name: pull code
+        uses: actions/checkout@master
 
+      - name: node and npm
+        uses: actions/setup-node@master
+        with:
+          node-version: "18.x"
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
 
+      - run: npm i -g pnpm
+
+      - run: pnpm install
+
+      - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
+
+      - run: pnpm -F @xunserver/doc run build
+
+      - name: deploy github
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.GITEE_PRIVATE_KEY }} # 和gitee的使用一个
+          external_repository: xuncool/doc
+          publish_branch: main
+          publish_dir: ./package/doc/dist
+          # cname: ${{ secrets.CNAME }}
+
+  deploy-gitee:
+    needs: deploy_doc
+    if: contains(github.event.commits[0].message, '(doc123)')
+    runs-on: ubuntu-latest
+    steps:
+      - name: pull code
+        uses: actions/checkout@master
+        with:
+          repository: "xuncool/doc"
+
+      - name: sync shell cmd
+        run: |
+          GITEE_GIT_ADDR="git@gitee.com:xuncool/doc.git"
+          SSHPATH="$HOME/.ssh"
+          git fetch --unshallow
+          rm -rf "$SSHPATH"
+          mkdir -p "$SSHPATH"
+          echo "${{ secrets.GITEE_PRIVATE_KEY }}" > "$SSHPATH/id_rsa"
+          chmod 600 "$SSHPATH/id_rsa"
+          sudo sh -c "echo StrictHostKeyChecking no >>/etc/ssh/ssh_config"
+          git remote add upstream $GITEE_GIT_ADDR
+          git push upstream --all --force
+
+      - name: Build Gitee Pages
+        uses: yanglbme/gitee-pages-action@main
+        with:
+          gitee-username: yang1358925129
+          gitee-password: ${{ secrets.GITEE_PASSWORD }}
+          gitee-repo: "xuncool/doc"
+          branch: main

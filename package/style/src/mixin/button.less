@@ -59,6 +59,7 @@
 
     &.disabled,
     &:disabled,
+    &-disabled,
     &[disabled] {
         cursor: @cursor-disabled;
 
@@ -166,6 +167,8 @@
 }
 
 .btn-default() {
+    .btn-color(@btn-default-color; @btn-default-background-color; @btn-default-border-color);
+
     &:active,
     &.active,
     &:focus {

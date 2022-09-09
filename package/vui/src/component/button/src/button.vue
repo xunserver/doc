@@ -23,6 +23,6 @@ const buttonCls = reactive([
     [addBtnPrefix('-circle')]: circle,
     [addBtnPrefix('-loading')]: loading,
   },
-  addBtnPrefix(size === 'middle' ? '' : '-' + size),
+  addBtnPrefix(size === 'middle' || !size ? '' : '-' + size),
 ])
 </script>

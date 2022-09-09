@@ -10,7 +10,11 @@ export default defineConfig({
       },
       {
         link: "/style",
-        text: "@xunserver/ui",
+        text: "@xunserver/style",
+      },
+      {
+        link: "/vui",
+        text: "@xunserver/vui",
       },
       {
         text: "lint",
@@ -33,16 +37,16 @@ export default defineConfig({
           },
           {
             text: "vscode",
-            link: "/vscode",
+            link: "/vscode-config",
           },
         ],
       },
       {
         text: "babel",
         items: [
-          { link: "/babel", text: "babel" },
+          { link: "/babel-config", text: "babel" },
           {
-            link: "/postcss",
+            link: "/postcss-config",
             text: "postcss",
           },
         ],

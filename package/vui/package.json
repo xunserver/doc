@@ -2,7 +2,6 @@
   "name": "@xunserver/vui",
   "version": "0.0.1",
   "description": "",
-  "main": "src/index.ts",
   "scripts": {
     "build": "vite build",
     "dev": "vite"
@@ -11,12 +10,24 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@xunserver/eslint-config": "^0.0.7",
-    "@xunserver/prettier-config": "^0.0.2",
     "@xunserver/style": "workspace:^0.0.1",
-    "@xunserver/vscode-config": "^0.0.1"
+    "vite-plugin-dts": "^1.4.1"
   },
   "dependencies": {
+    "@xunserver/eslint-config": "workspace:^0.0.7",
+    "@xunserver/prettier-config": "workspace:^0.0.2",
     "@xunserver/vui": "^0.0.1"
-  }
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/es/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/es/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ]
 }

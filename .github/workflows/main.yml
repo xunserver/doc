@@ -136,6 +136,9 @@ jobs:
           git init
           git config --local user.email "bot@auto.xunserver.cn" 
           git config --local user.name "bot"
+          git checkout -b main
+          pwd 
+          ls -l
           git add --all
           git commit -m "auto deploy"
           git remote add upstream $GITEE_GIT_ADDR

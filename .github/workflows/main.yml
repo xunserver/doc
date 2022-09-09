@@ -165,8 +165,8 @@ jobs:
           chmod 600 "$SSHPATH/id_rsa"
           sudo sh -c "echo StrictHostKeyChecking no >>/etc/ssh/ssh_config"
           git checkout doc
-          git remote add origin $GITEE_GIT_ADDR
-          git push origin doc:main --force
+          git remote add gitee $GITEE_GIT_ADDR
+          git push gitee doc:main --force
 
       - name: Build Gitee Pages
         uses: yanglbme/gitee-pages-action@main

@@ -79,7 +79,7 @@ jobs:
   # doc
   deploy_doc:
     runs-on: ubuntu-latest
-    # if: contains(github.event.commits[0].message, '(doc)')
+    if: contains(github.event.commits[0].message, '(doc)')
     steps:
       - name: pull code
         uses: actions/checkout@master
@@ -111,6 +111,29 @@ jobs:
           publish_dir: ./package/doc/dist
           cname: ${{ secrets.CNAME }}
 
+  deploy_gitee_doc:
+    runs-on: ubuntu-latest
+    if: contains(github.event.commits[0].message, '(doc)')
+    steps:
+      - name: pull code
+        uses: actions/checkout@master
+
+      - name: node and npm
+        uses: actions/setup-node@master
+        with:
+          node-version: "18.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - run: npm i -g pnpm
+
+      - run: pnpm install
+
+      - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
+
+      - run: pnpm -F @xunserver/style run build
+
+      - run: pnpm -F @xunserver/vui run build
+
       - run: pnpm -F @xunserver/doc run build:doc
 
       - name: deploy github
@@ -118,12 +141,12 @@ jobs:
         with:
           deploy_key: ${{ secrets.GITEE_PRIVATE_KEY }} # 和gitee的使用一个
           external_repository: xuncool/doc
-          publish_branch: doc
+          publish_branch: main
           publish_dir: ./package/doc/dist
           cname: ${{ secrets.CNAME }}
 
   deploy-gitee:
-    needs: deploy_doc
+    needs: deploy_gitee_doc
     runs-on: ubuntu-latest
     steps:
       - name: pull code

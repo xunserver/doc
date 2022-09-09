@@ -96,6 +96,10 @@ jobs:
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 
+      - run: pnpm -F @xunserver/style run build
+
+      - run: pnpm -F @xunserver/vui run build
+
       - run: pnpm -F @xunserver/doc run build
 
       - name: deploy github

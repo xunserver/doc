@@ -1,16 +1,21 @@
 {
-  "name": "icon",
+  "name": "@xunserver/icon",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "g": "npm run generate",
+    "generate": "cross-env NODE_ENV=production gulp"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {
+    "del": "^5.0.0",
+    "ejs": "^3.1.8",
+    "svgo": "^2.8.0"
+  },
   "dependencies": {
-    "@ant-design/icons-svg": "^4.2.1",
-    "@ant-design/icons-vue": "^6.1.0"
+    "@rgrove/parse-xml": "^3.0.0"
   }
 }

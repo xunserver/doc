@@ -13,7 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@xunserver/vui": "workspace:^0.0.1",
+    "@xunserver/prettier-config": "workspace:*",
+    "@xunserver/style": "workspace:*",
+    "@xunserver/vui": "workspace:*",
     "vitepress": "1.0.0-alpha.13"
   }
 }

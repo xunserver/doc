@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "xuncool 仓库合集",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "pub": "node build/publish.mjs"
   },
@@ -22,14 +23,5 @@
     "typescript": "^4.8.2",
     "vite": "^3.1.0",
     "vue": "^3.2.38"
-  },
-  "dependencies": {
-    "@xunserver/babel-config": "^0.0.1",
-    "@xunserver/commitlint-config": "^0.0.6",
-    "@xunserver/eslint-config": "^0.0.7",
-    "@xunserver/prettier-config": "^0.0.2",
-    "@xunserver/style": "^0.0.1",
-    "@xunserver/stylelint-config": "^0.0.7",
-    "@xunserver/vui": "^0.0.1"
   }
 }

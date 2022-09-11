@@ -5,17 +5,17 @@
   "main": "index.js",
   "scripts": {
     "g": "npm run generate",
-    "generate": "cross-env NODE_ENV=production gulp"
+    "generate": "cross-env NODE_ENV=production gulp -LLLL"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@rgrove/parse-xml": "^3.0.0",
+    "@types/through2": "^2.0.36",
     "del": "^5.0.0",
     "ejs": "^3.1.8",
-    "svgo": "^2.8.0"
-  },
-  "dependencies": {
-    "@rgrove/parse-xml": "^3.0.0"
+    "svgo": "^2.8.0",
+    "through2": "^3.0.2"
   }
 }

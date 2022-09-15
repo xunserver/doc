@@ -1,5 +1,5 @@
 import del from "del";
-import { src, dest, parallel, series } from "gulp";
+import { src, dest, series } from "gulp";
 import { pipe } from "@xunserver/util";
 import parseXML from "@rgrove/parse-xml";
 import { streamTransform } from "./plugin/streamTransform";

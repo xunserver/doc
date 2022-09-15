@@ -7,12 +7,12 @@ async function main() {
   shelljs.exec('npm version patch')
 
   // 发布npm
-  shelljs.exec('npm publish --access public')
+  shelljs.exec('pnpm publish --access public --no-git-checks')
 
   // 更新git
   shelljs.exec('git add package.json')
   const packageJson = require('./package.json')
-  shelljs.exec(`git commit -m "${packageJson.version}"`)
+  shelljs.exec(`git commit -m "${packageJson.name} ${packageJson.version}"`)
   shelljs.exec(`git push origin main`)
 }
 

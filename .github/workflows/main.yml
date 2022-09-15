@@ -198,6 +198,6 @@ jobs:
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 
-      - run: cd package/icon && npm run build && npm run pub
+      - run: cd package/icon && npm run pub
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}

@@ -5,7 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "pub": "node build/publish.mjs"
+    "pub": "node build/publish.mjs",
+    "preinstall": "npx only-allow pnpm"
   },
   "keywords": [],
   "author": "",

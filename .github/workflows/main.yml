@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  # cli
+  # cli 发布npm
   publish_cli:
     runs-on: ubuntu-latest
     if: contains(github.event.commits[0].message, '(cli)') && contains(github.event.commits[0].message, '[pub]')
@@ -30,7 +30,7 @@ jobs:
       - run: cd package/cli && npm run pub
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
-  # vui
+  # vui 发布npm
   publish_vui:
     runs-on: ubuntu-latest
     if: contains(github.event.commits[0].message, '(vui)') && contains(github.event.commits[0].message, '[pub]')
@@ -53,7 +53,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
-  # style
+  # style 发布 npm
   publish_style:
     runs-on: ubuntu-latest
     if: contains(github.event.commits[0].message, '(style)') && contains(github.event.commits[0].message, '[pub]')
@@ -76,7 +76,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
-  # doc
+  # doc 部署到githubpage
   deploy_doc:
     runs-on: ubuntu-latest
     if: contains(github.event.commits[0].message, '(doc)')
@@ -111,6 +111,7 @@ jobs:
           publish_dir: ./package/doc/dist
           cname: ${{ secrets.CNAME }}
 
+  # doc 部署到gitee
   deploy_gitee_doc:
     runs-on: ubuntu-latest
     if: contains(github.event.commits[0].message, '(doc)')
@@ -145,6 +146,7 @@ jobs:
           publish_dir: ./package/doc/dist
           cname: ${{ secrets.CNAME }}
 
+  # doc 部署到gitee
   deploy-gitee:
     needs: deploy_gitee_doc
     runs-on: ubuntu-latest

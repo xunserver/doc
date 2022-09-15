@@ -143,18 +143,37 @@ importers:
   package/icon:
     specifiers:
       '@rgrove/parse-xml': ^3.0.0
+      '@types/ejs': ^3.1.1
+      '@types/gulp-rename': ^2.0.1
+      '@types/lodash': ^4.14.185
+      '@types/svgo': ^2.6.4
       '@types/through2': ^2.0.36
+      '@types/vinyl': ^2.0.6
+      '@xunserver/util': workspace:*
       del: ^5.0.0
       ejs: ^3.1.8
+      gulp-rename: ^2.0.0
+      lodash: ^4.17.21
       svgo: ^2.8.0
       through2: ^3.0.2
+      vinyl: ^2.2.1
+    dependencies:
+      '@types/gulp-rename': 2.0.1
+      '@types/svgo': 2.6.4
+      '@xunserver/util': link:../util
+      gulp-rename: 2.0.0
     devDependencies:
       '@rgrove/parse-xml': 3.0.0
+      '@types/ejs': 3.1.1
+      '@types/lodash': 4.14.185
       '@types/through2': 2.0.36
+      '@types/vinyl': 2.0.6
       del: 5.1.0
       ejs: 3.1.8
+      lodash: 4.17.21
       svgo: 2.8.0
       through2: 3.0.2
+      vinyl: 2.2.1
 
   package/postcss-config:
     specifiers:
@@ -2304,6 +2323,10 @@ packages:
       del: 7.0.0
     dev: true
 
+  /@types/ejs/3.1.1:
+    resolution: {integrity: sha512-RQul5wEfY7BjWm0sYY86cmUN/pcXWGyVxWX93DFFJvcrxax5zKlieLwA3T77xJGwNcZW0YW6CYG70p1m8xPFmA==}
+    dev: true
+
   /@types/eslint-scope/3.7.4:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
@@ -2332,7 +2355,6 @@ packages:
 
   /@types/expect/1.20.4:
     resolution: {integrity: sha512-Q5Vn3yjTDyCMV50TB6VRIbQNxSE4OmZR86VSbGaNpfUolm0iePBB4KdEEHmxoY5sT2+2DIvXW0rvMDP2nHZ4Mg==}
-    dev: true
 
   /@types/fs-extra/8.1.2:
     resolution: {integrity: sha512-SvSrYXfWSc7R4eqnOzbQF4TZmfpNSM9FrSWLU3EUnWBuyZqNBOrv1B1JA3byUDPUl9z4Ab3jeZG2eDdySlgNMg==}
@@ -2361,6 +2383,13 @@ packages:
       '@types/node': 18.7.16
     dev: true
 
+  /@types/gulp-rename/2.0.1:
+    resolution: {integrity: sha512-9ZjeS2RHEnmBmTcyi2+oeye3BgCsWhvi4uv3qCnAg8i6plOuRdaeNxjOves0ELysEXYLBl7bCl5fbVs7AZtgTA==}
+    dependencies:
+      '@types/node': 18.7.16
+      '@types/vinyl': 2.0.6
+    dev: false
+
   /@types/gulp/4.0.9:
     resolution: {integrity: sha512-zzT+wfQ8uwoXjDhRK9Zkmmk09/fbLLmN/yDHFizJiEKIve85qutOnXcP/TM2sKPBTU+Jc16vfPbOMkORMUBN7Q==}
     dependencies:
@@ -2381,6 +2410,10 @@ packages:
     dependencies:
       '@types/node': 18.7.16
     dev: false
+
+  /@types/lodash/4.14.185:
+    resolution: {integrity: sha512-evMDG1bC4rgQg4ku9tKpuMh5iBNEwNa3tf9zRHdP1qlv+1WUg44xat4IxCE14gIpZRGUUWAx2VhItCZc25NfMA==}
+    dev: true
 
   /@types/minimatch/5.1.2:
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
@@ -2427,6 +2460,12 @@ packages:
       '@types/node': 18.7.16
     dev: true
 
+  /@types/svgo/2.6.4:
+    resolution: {integrity: sha512-l4cmyPEckf8moNYHdJ+4wkHvFxjyW6ulm9l4YGaOxeyBWPhBOT0gvni1InpFPdzx1dKf/2s62qGITwxNWnPQng==}
+    dependencies:
+      '@types/node': 18.7.16
+    dev: false
+
   /@types/through2/2.0.36:
     resolution: {integrity: sha512-vuifQksQHJXhV9McpVsXKuhnf3lsoX70PnhcqIAbs9dqLH2NgrGz0DzZPDY3+Yh6eaRqcE1gnCQ6QhBn1/PT5A==}
     dependencies:
@@ -2458,7 +2497,6 @@ packages:
     dependencies:
       '@types/expect': 1.20.4
       '@types/node': 18.7.16
-    dev: true
 
   /@types/web-bluetooth/0.0.15:
     resolution: {integrity: sha512-w7hEHXnPMEZ+4nGKl/KDRVpxkwYxYExuHOYXyzIzCDzEZ9ZCGMAewulr9IqJu2LR4N37fcnb1XVeuZ09qgOxhA==}
@@ -5803,6 +5841,11 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /gulp-rename/2.0.0:
+    resolution: {integrity: sha512-97Vba4KBzbYmR5VBs9mWmK+HwIf5mj+/zioxfZhOKeXtx5ZjBk57KFlePf5nxq9QsTtFl0ejnHE3zTC9MHXqyQ==}
+    engines: {node: '>=4'}
+    dev: false
 
   /gulp/4.0.2:
     resolution: {integrity: sha512-dvEs27SCZt2ibF29xYgmnwwCYZxdxhQ/+LFWlbAW8y7jt68L/65402Lz3+CKy0Ov4rOs+NERmDq7YlZaDqUIfA==}

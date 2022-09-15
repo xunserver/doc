@@ -178,27 +178,27 @@ jobs:
           gitee-repo: "xuncool/doc"
           branch: main
 
-# 发布icon基础库
-publish_icon:
-  runs-on: ubuntu-latest
-  if: contains(github.event.commits[0].message, '(icon)') && contains(github.event.commits[0].message, '[pub]')
-  steps:
-    - name: pull code
-      uses: actions/checkout@master
+  # 发布icon基础库
+  publish_icon:
+    runs-on: ubuntu-latest
+    if: contains(github.event.commits[0].message, '(icon)') && contains(github.event.commits[0].message, '[pub]')
+    steps:
+      - name: pull code
+        uses: actions/checkout@master
 
-    - name: node and npm
-      uses: actions/setup-node@master
-      with:
-        node-version: "18.x"
-        cache: "npm"
-        registry-url: "https://registry.npmjs.org"
+      - name: node and npm
+        uses: actions/setup-node@master
+        with:
+          node-version: "18.x"
+          cache: "npm"
+          registry-url: "https://registry.npmjs.org"
 
-    - run: npm i -g pnpm
+      - run: npm i -g pnpm
 
-    - run: pnpm i
+      - run: pnpm i
 
-    - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
+      - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 
-    - run: cd package/icon && npm run build && npm run pub
-      env:
-        NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
+      - run: cd package/icon && npm run build && npm run pub
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}

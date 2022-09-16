@@ -1,6 +1,6 @@
 import * as Icon from '@xunserver/icon';
 import { renderFile } from 'ejs';
-import { writeFileSync } from 'fs';
+import { writeFileSync, mkdirSync } from 'fs';
 
 const icons = Object.entries(Icon).filter(([_,icon]) => icon.name)
 const templateContent = {
@@ -8,6 +8,8 @@ const templateContent = {
   exportString: '',
   install: ''
 }
+
+mkdirSync('./src/icon')
 
 icons.forEach(async ([name, icon]) => {
   const string = await renderFile('./template/icon.vue.ejs', {name: icon.name});

@@ -96,9 +96,13 @@ jobs:
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 
-      - run: pnpm -F @xunserver/style run build
-
-      - run: pnpm -F @xunserver/vui run build
+      - run: |
+          pnpm -F @xunserver/style run build
+          pnpm -F @xunserver/vui run build
+          pnpm -F @xunserver/icon run g
+          pnpm -F @xunserver/icon run build
+          pnpm -F @xunserver/icon-vue run g
+          pnpm -F @xunserver/icon-vue run build
 
       - run: pnpm -F @xunserver/doc run build
 
@@ -131,9 +135,15 @@ jobs:
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 
-      - run: pnpm -F @xunserver/style run build
+      - run: |
+          pnpm -F @xunserver/style run build
+          pnpm -F @xunserver/vui run build
+          pnpm -F @xunserver/icon run g
+          pnpm -F @xunserver/icon run build
+          pnpm -F @xunserver/icon-vue run g
+          pnpm -F @xunserver/icon-vue run build
 
-      - run: pnpm -F @xunserver/vui run build
+      - run: pnpm -F @xunserver/icon-vue run build
 
       - run: pnpm -F @xunserver/doc run build:doc
 

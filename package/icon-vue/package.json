@@ -1,0 +1,29 @@
+{
+  "name": "@xunserver/icon-vue",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "build": "vite build",
+    "g": "ts-node generate"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@xunserver/icon": "workspace:*",
+    "vite-plugin-dts": "^1.4.1"
+  },
+  "main": "./dist/lib/index.js",
+  "module": "./dist/es/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/es/index.js",
+      "require": "./dist/lib/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "types": "dist/es/index.d.ts"
+}

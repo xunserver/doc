@@ -5,11 +5,13 @@ importers:
   .:
     specifiers:
       '@types/del': ^4.0.0
+      '@types/ejs': ^3.1.1
       '@types/gulp': ^4.0.9
       '@types/node': ^18.7.16
       '@vitejs/plugin-vue': ^3.1.0
       '@vue/compiler-sfc': ^3.2.38
       cross-env: ^7.0.3
+      ejs: ^3.1.8
       gulp: ^4.0.2
       inquirer: 9.1.0
       jsonfile: ^6.1.0
@@ -22,11 +24,13 @@ importers:
       vue: ^3.2.38
     devDependencies:
       '@types/del': 4.0.0
+      '@types/ejs': 3.1.1
       '@types/gulp': 4.0.9
       '@types/node': 18.7.18
       '@vitejs/plugin-vue': 3.1.0_vite@3.1.1+vue@3.2.39
       '@vue/compiler-sfc': 3.2.39
       cross-env: 7.0.3
+      ejs: 3.1.8
       gulp: 4.0.2
       inquirer: 9.1.0
       jsonfile: 6.1.0
@@ -102,11 +106,13 @@ importers:
 
   package/doc:
     specifiers:
+      '@xunserver/icon-vue': workspace:*
       '@xunserver/prettier-config': workspace:*
       '@xunserver/style': workspace:*
       '@xunserver/vui': workspace:*
       vitepress: 1.0.0-alpha.13
     dependencies:
+      '@xunserver/icon-vue': link:../icon-vue
       '@xunserver/prettier-config': link:../prettier-config
       '@xunserver/style': link:../style
       '@xunserver/vui': link:../vui
@@ -142,6 +148,7 @@ importers:
 
   package/icon:
     specifiers:
+      '@reactivex/rxjs': ^6.6.7
       '@rgrove/parse-xml': ^3.0.0
       '@types/ejs': ^3.1.1
       '@types/gulp-rename': ^2.0.1
@@ -162,6 +169,7 @@ importers:
       '@xunserver/util': link:../util
       gulp-rename: 2.0.0
     devDependencies:
+      '@reactivex/rxjs': 6.6.7
       '@rgrove/parse-xml': 3.0.0
       '@types/ejs': 3.1.1
       '@types/lodash': 4.14.185
@@ -172,6 +180,14 @@ importers:
       lodash: 4.17.21
       svgo: 2.8.0
       through2: 3.0.2
+
+  package/icon-vue:
+    specifiers:
+      '@xunserver/icon': workspace:*
+      vite-plugin-dts: ^1.4.1
+    devDependencies:
+      '@xunserver/icon': link:../icon
+      vite-plugin-dts: 1.5.0
 
   package/postcss-config:
     specifiers:
@@ -251,6 +267,23 @@ importers:
       stylelint-less: 1.0.6_stylelint@14.11.0
       stylelint-order: 5.0.0_stylelint@14.11.0
       stylelint-scss: 4.3.0_stylelint@14.11.0
+
+  package/test:
+    specifiers:
+      '@vitejs/plugin-vue': ^3.1.0
+      '@xunserver/icon-vue': workspace:*
+      typescript: ^4.6.4
+      vite: ^3.1.0
+      vue: ^3.2.37
+      vue-tsc: ^0.40.4
+    dependencies:
+      vue: 3.2.39
+    devDependencies:
+      '@vitejs/plugin-vue': 3.1.0_vite@3.1.1+vue@3.2.39
+      '@xunserver/icon-vue': link:../icon-vue
+      typescript: 4.8.3
+      vite: 3.1.1
+      vue-tsc: 0.40.13_typescript@4.8.3
 
   package/util:
     specifiers: {}
@@ -2206,6 +2239,13 @@ packages:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
 
+  /@reactivex/rxjs/6.6.7:
+    resolution: {integrity: sha512-xZIV2JgHhWoVPm3uVcFbZDRVJfx2hgqmuTX7J4MuKaZ+j5jN29agniCPBwrlCmpA15/zLKcPi7/bogt0ZwOFyA==}
+    engines: {npm: '>=2.0.0'}
+    dependencies:
+      tslib: 1.14.1
+    dev: true
+
   /@rgrove/parse-xml/3.0.0:
     resolution: {integrity: sha512-GFGDywRwGbuGq9yeL8wTjjLOsZ5Ps4O5tQ71eDcAfaZrZeA7Oe8QJzrnmFgplWtnoaBIBaFBB3n5Ht9iU4jLLw==}
     engines: {node: '>=12.0.0'}
@@ -2646,6 +2686,44 @@ packages:
       vite: 3.1.1
       vue: 3.2.39
 
+  /@volar/code-gen/0.40.13:
+    resolution: {integrity: sha512-4gShBWuMce868OVvgyA1cU5WxHbjfEme18Tw6uVMfweZCF5fB2KECG0iPrA9D54vHk3FeHarODNwgIaaFfUBlA==}
+    dependencies:
+      '@volar/source-map': 0.40.13
+    dev: true
+
+  /@volar/source-map/0.40.13:
+    resolution: {integrity: sha512-dbdkAB2Nxb0wLjAY5O64o3ywVWlAGONnBIoKAkXSf6qkGZM+nJxcizsoiI66K+RHQG0XqlyvjDizfnTxr+6PWg==}
+    dependencies:
+      '@vue/reactivity': 3.2.38
+    dev: true
+
+  /@volar/typescript-faster/0.40.13:
+    resolution: {integrity: sha512-uy+TlcFkKoNlKEnxA4x5acxdxLyVDIXGSc8cYDNXpPKjBKXrQaetzCzlO3kVBqu1VLMxKNGJMTKn35mo+ILQmw==}
+    dependencies:
+      semver: 7.3.7
+    dev: true
+
+  /@volar/vue-language-core/0.40.13:
+    resolution: {integrity: sha512-QkCb8msi2KUitTdM6Y4kAb7/ZlEvuLcbBFOC2PLBlFuoZwyxvSP7c/dBGmKGtJlEvMX0LdCyrg5V2aBYxD38/Q==}
+    dependencies:
+      '@volar/code-gen': 0.40.13
+      '@volar/source-map': 0.40.13
+      '@vue/compiler-core': 3.2.39
+      '@vue/compiler-dom': 3.2.39
+      '@vue/compiler-sfc': 3.2.39
+      '@vue/reactivity': 3.2.39
+      '@vue/shared': 3.2.39
+    dev: true
+
+  /@volar/vue-typescript/0.40.13:
+    resolution: {integrity: sha512-o7bNztwjs8JmbQjVkrnbZUOfm7q4B8ZYssETISN1tRaBdun6cfNqgpkvDYd+VUBh1O4CdksvN+5BUNnwAz4oCQ==}
+    dependencies:
+      '@volar/code-gen': 0.40.13
+      '@volar/typescript-faster': 0.40.13
+      '@volar/vue-language-core': 0.40.13
+    dev: true
+
   /@vue/babel-helper-vue-jsx-merge-props/1.4.0:
     resolution: {integrity: sha512-JkqXfCkUDp4PIlFdDQ0TdXoIejMtTHP67/pvxlgeY+u5k3LEdKuWZ3LK6xkxo52uDoABIVyRwqVkfLQJhk7VBA==}
     dev: false
@@ -2792,6 +2870,12 @@ packages:
       estree-walker: 2.0.2
       magic-string: 0.25.9
 
+  /@vue/reactivity/3.2.38:
+    resolution: {integrity: sha512-6L4myYcH9HG2M25co7/BSo0skKFHpAN8PhkNPM4xRVkyGl1K5M3Jx4rp5bsYhvYze2K4+l+pioN4e6ZwFLUVtw==}
+    dependencies:
+      '@vue/shared': 3.2.38
+    dev: true
+
   /@vue/reactivity/3.2.39:
     resolution: {integrity: sha512-vlaYX2a3qMhIZfrw3Mtfd+BuU+TZmvDrPMa+6lpfzS9k/LnGxkSuf0fhkP0rMGfiOHPtyKoU9OJJJFGm92beVQ==}
     dependencies:
@@ -2818,6 +2902,10 @@ packages:
       '@vue/compiler-ssr': 3.2.39
       '@vue/shared': 3.2.39
       vue: 3.2.39
+
+  /@vue/shared/3.2.38:
+    resolution: {integrity: sha512-dTyhTIRmGXBjxJE+skC8tTWCGLCVc4wQgRRLt8+O9p5ewBAjoBwtCAkLPrtToSr1xltoe3st21Pv953aOZ7alg==}
+    dev: true
 
   /@vue/shared/3.2.39:
     resolution: {integrity: sha512-D3dl2ZB9qE6mTuWPk9RlhDeP1dgNRUKC3NJxji74A4yL8M2MwlhLKUC/49WHjrNzSPug58fWx/yFbaTzGAQSBw==}
@@ -9473,7 +9561,6 @@ packages:
 
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
-    dev: false
 
   /tslib/2.4.0:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
@@ -9877,6 +9964,17 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: false
+
+  /vue-tsc/0.40.13_typescript@4.8.3:
+    resolution: {integrity: sha512-xzuN3g5PnKfJcNrLv4+mAjteMd5wLm5fRhW0034OfNJZY4WhB07vhngea/XeGn7wNYt16r7syonzvW/54dcNiA==}
+    hasBin: true
+    peerDependencies:
+      typescript: '*'
+    dependencies:
+      '@volar/vue-language-core': 0.40.13
+      '@volar/vue-typescript': 0.40.13
+      typescript: 4.8.3
+    dev: true
 
   /vue/3.2.39:
     resolution: {integrity: sha512-tRkguhRTw9NmIPXhzk21YFBqXHT2t+6C6wPOgQ50fcFVWnPdetmRqbmySRHznrYjX2E47u0cGlKGcxKZJ38R/g==}

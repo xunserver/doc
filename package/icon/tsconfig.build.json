@@ -4,5 +4,5 @@
     "target": "ESNext",
     "declaration": true
   },
-  "include": ["src/icon/*"]
+  "include": ["src/icon/*", "src/index.ts"]
 }

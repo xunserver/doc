@@ -34,3 +34,9 @@ loading
 <!--@include: ../demo/vui/button-group.html-->
 
 <<< @/../demo/vui/button-group.html
+
+## icon
+
+<!--@include: ../demo/vui/icon.html-->    
+
+<<< @/../demo/vui/icon-1.html   

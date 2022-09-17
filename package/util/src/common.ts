@@ -17,7 +17,7 @@ export const pipeAsync =
     let i = 0;
     let result = initParams;
     for (;;) {
-      const fn = fns[i];
+      const fn = fns[i++];
       if (fn) {
         result = await fn(result);
       } else {

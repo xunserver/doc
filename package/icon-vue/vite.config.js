@@ -22,6 +22,9 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'dist/assets',
     minify: false,
+    external: [
+      '@xunserver/icon'
+    ],
     // cssCodeSplit: true,
     rollupOptions: {
       external: ['vue'],

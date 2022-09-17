@@ -7,14 +7,15 @@
     "strict": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
+    "declaration": true,
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
     "allowJs": true,
     "baseUrl": "./",
-    "declaration": true,
     "paths": {
       "@/*": ["*"],
-      "@src/": ["src/*"],
+      "@src/": ["src/*"]
     }
-  }
+  },
+  "include": ["src"]
 }

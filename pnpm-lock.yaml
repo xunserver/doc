@@ -184,7 +184,10 @@ importers:
   package/icon-vue:
     specifiers:
       '@xunserver/icon': workspace:*
+      '@xunserver/util': workspace:^0.0.1
       vite-plugin-dts: ^1.4.1
+    dependencies:
+      '@xunserver/util': link:../util
     devDependencies:
       '@xunserver/icon': link:../icon
       vite-plugin-dts: 1.5.0

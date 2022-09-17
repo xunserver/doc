@@ -211,3 +211,27 @@ jobs:
       - run: cd package/icon && npm run pub
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
+
+  # 发布icon基础库
+  publish_icon_vue:
+    runs-on: ubuntu-latest
+    if: contains(github.event.commits[0].message, '(icon-vue)') && contains(github.event.commits[0].message, '[pub]')
+    steps:
+      - name: pull code
+        uses: actions/checkout@master
+
+      - name: node and npm
+        uses: actions/setup-node@master
+        with:
+          node-version: "18.x"
+          registry-url: "https://registry.npmjs.org"
+
+      - run: npm i -g pnpm
+
+      - run: pnpm i
+
+      - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
+
+      - run: cd package/icon-vue && npm run pub
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}

@@ -1,6 +1,7 @@
 import * as Icon from '@xunserver/icon';
 import { renderFile } from 'ejs';
 import { writeFileSync, mkdirSync } from 'fs';
+import { ignoreError } '@xunserver/util';
 
 const icons = Object.entries(Icon).filter(([_,icon]) => icon.name)
 const templateContent = {
@@ -9,7 +10,7 @@ const templateContent = {
   install: ''
 }
 
-mkdirSync('./src/icon')
+ignoreError(() => mkdirSync('./src/icon'))
 
 icons.forEach(async ([name, icon]) => {
   const string = await renderFile('./template/icon.vue.ejs', {name: icon.name});

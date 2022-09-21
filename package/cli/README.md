@@ -11,3 +11,6 @@ npm i -g @xunserver/cli
 ### add 
 #### lint
 通过问询的方式添加项目lint规则，使用会在项目中添加响应的lint规则， 包括eslint、stylelint、prettier、commitlint和editorconfig规则。
+
+### pub
+通过获取当前目录下的配置文件

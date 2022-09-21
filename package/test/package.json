@@ -14,6 +14,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^3.1.0",
     "@xunserver/icon-vue": "workspace:*",
+    "@xunserver/util": "workspace:^0.0.1",
     "typescript": "^4.6.4",
     "vite": "^3.1.0",
     "vue-tsc": "^0.40.4"

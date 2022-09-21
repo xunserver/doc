@@ -8,6 +8,7 @@
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
+    "declarationDir": "types",
     "forceConsistentCasingInFileNames": true,
     "useDefineForClassFields": true,
     "allowJs": true,

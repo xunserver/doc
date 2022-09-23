@@ -1,16 +1,33 @@
 import shelljs from "shelljs";
-import { resolve, dirname } from "path";
-import { fileURLToPath } from "url";
+import { resolve } from "path";
 import inquirer from "inquirer";
 import { ignoreError, sequenceIterate } from "../../utils/common";
 import { renderAndOutput } from "../../utils/render";
+
+type LintsType = "all"|"prettier"|"editorconfig"|"eslint"|"stylelint"|"commitlint";
+
+interface RenderContext {
+  type
+}
+interface LintAnswers {
+  type: "vue"| "vue2"| "react"| "recommended",
+  typescript: boolean;
+  lints: LintsType[];
+  isOverride: boolean;
+}
+interface createConfigOptions {
+  packageName: string;
+  configFileName: string;
+  saveDev: true;
+  renderData: (answer: LintAnswers, ) =>
+}
 
 const createConfigFile = ({
   packageName,
   configFileName,
   saveDev = true,
   renderData = () => ({}),
-}) => {
+}: createConfigOptions) => {
   return async function (answer, context) {
     // 安装相关依赖
     shelljs.exec(`npm i ${saveDev ? "-D" : ""} ${packageName}`);

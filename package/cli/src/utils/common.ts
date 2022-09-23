@@ -1,4 +1,4 @@
-import { errorLog, infoLog, successLog } from "./log";
+import { errorLog, infoLog } from "./log";
 
 export const sequenceIterate = async (fns, ...args) => {
   for (let i = 0; i < fns.length; i++) {
@@ -19,7 +19,7 @@ export const to = (promise) =>
     .then((result) => [null, result])
     .catch((err) => [err, null]);
 
-export const stringFunction = (message) =>
+export const stringFunc = (message) =>
   typeof message === "function" ? message() : message;
 
 export const taskWithMessage = (
@@ -31,10 +31,10 @@ export const taskWithMessage = (
   let result;
   try {
     result = fn();
-    infoLog(stringFunction(successMsg));
+    infoLog(stringFunc(successMsg));
     return result;
   } catch (err) {
-    errorLog(stringFunction(errorMsg));
+    errorLog(stringFunc(errorMsg));
     if (!ignoreError) {
       process.exit();
     }

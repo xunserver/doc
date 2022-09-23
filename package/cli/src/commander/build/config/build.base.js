@@ -1,8 +1,12 @@
-const { cssLoader, sassLoader, lessLoader } = require("../loader");
+import { cssLoader, sassLoader, lessLoader } from "../loader";
+import { createAlias } from "../util/alias";
+import { createDefineFromEnv } from "../util/env";
+import { resolveFromRoot } from "../util/path";
 
-module.exports = {
+export const webpackBaseConfig = {
+  context: process.cwd(),
   resolve: {
-    alias: getAlias(),
+    alias: createAlias(),
     extensions: [".js", "jsx", "ts", "tsx"],
   },
   module: {
@@ -31,9 +35,17 @@ module.exports = {
   },
   plugin: [
     new DefinePlugin(
-      genDefinePluginEnv({
+      createDefineFromEnv({
         NODE_ENV: process.env.NODE_ENV,
       })
     ),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: resolveFromRoot("src/public"),
+          to: resolveFromRoot("dist/public"),
+        },
+      ],
+    }),
   ],
 };

@@ -1,9 +1,6 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const {
-  posix: { relative },
-} = require("path");
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
-exports.cssLoader = (isDev) => {
+export const cssLoader = (isDev) => {
   return [
     isDev
       ? {
@@ -26,7 +23,7 @@ exports.cssLoader = (isDev) => {
   ];
 };
 
-exports.sassLoader = (options) => {
+export const sassLoader = (options) => {
   return [
     {
       loader: "resolve-url-loader",
@@ -44,7 +41,7 @@ exports.sassLoader = (options) => {
   ];
 };
 
-exports.lessLoader = (options) => {
+export const lessLoader = (options) => {
   return [
     {
       loader: "less-loader",

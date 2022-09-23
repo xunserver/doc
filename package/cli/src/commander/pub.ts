@@ -1,12 +1,11 @@
-import Inquirer from "inquirer";
 import { resolve } from "path";
-import jsonfile from "jsonfile";
-import shelljs from "shelljs";
+import { readFileSync } from "jsonfile";
+import * as shelljs from "shelljs";
 import { program } from "commander";
 
 const rootDir = process.cwd();
 
-const ignoreError = (fn) => {
+const ignoreError = (fn: Function) => {
   try {
     fn();
   } catch (err) {
@@ -14,10 +13,28 @@ const ignoreError = (fn) => {
   }
 };
 
-export const publishPackage = (baseDir, option) => {
+/**
+ * publish 命令参数
+ */
+interface PublishOptions {
+  /**
+   * 是否自动发布git
+   */
+  git: boolean;
+  /**
+   * 远程仓库名
+   */
+  remote: string;
+  /**
+   * 远程分支名
+   */
+  branch: string;
+}
+
+export const publishPackage = (baseDir: string, option: PublishOptions) => {
   shelljs.config.fatal = true;
   shelljs.cd(baseDir);
-  let packageJson = jsonfile.readFileSync(resolve(baseDir, "package.json"));
+  let packageJson = readFileSync(resolve(baseDir, "package.json"));
   if (packageJson.scripts?.pub) {
     return shelljs.exec("npm run pub");
   }
@@ -31,7 +48,7 @@ export const publishPackage = (baseDir, option) => {
   if (option.git) {
     shelljs.exec("git add package.json"); // 发布npm仓库
 
-    packageJson = jsonfile.readFileSync(resolve(baseDir, "package.json"));
+    packageJson = readFileSync(resolve(baseDir, "package.json"));
     shelljs.exec(`git commit -m '${packageJson.version}'`); // 发布npm仓库
     shelljs.exec(`git push ${option.remote} ${option.branch}`); // 发布npm仓库
   }
@@ -42,8 +59,8 @@ program
   .alias("p")
   .description("发布npm仓库")
   .option("-G, --git", "是否自动发布git", true)
-  .option("-R, --remote [remote]", "发布的git仓库名称", 'origin')
+  .option("-R, --remote [remote]", "发布的git仓库名称", "origin")
   .option("-B, --branch [branch]", "git 分支名称", "main")
-  .action((option) => {
+  .action((option: PublishOptions) => {
     publishPackage(rootDir, option);
   });

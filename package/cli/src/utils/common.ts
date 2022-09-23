@@ -1,36 +1,36 @@
 import { errorLog, infoLog } from "./log";
 
-export const sequenceIterate = async (fns, ...args) => {
+export const sequenceIterate = async (fns: Function[], ...args) => {
   for (let i = 0; i < fns.length; i++) {
     await fns[i](...args);
   }
 };
 
-export const ignoreError = (fn, context, ...args) => {
+export const ignoreError = <T>(fn: () => T, context?: any, ...args) => {
   try {
-    return fn.apply(context, args);
+    return fn.apply(context, args as any);
   } catch (err) {
     console.error(err);
   }
 };
 
-export const to = (promise) =>
+export const to = (promise: Promise<any>) =>
   Promise.resolve(promise)
     .then((result) => [null, result])
     .catch((err) => [err, null]);
 
-export const stringFunc = (message) =>
+type MessageString = string | ((s?: string) => string);
+export const stringFunc = (message: MessageString) =>
   typeof message === "function" ? message() : message;
 
-export const taskWithMessage = (
-  fn,
-  errorMsg,
-  successMsg,
-  { ignoreError } = {}
+export const taskWithMessage = <T>(
+  fn: (...args) => T,
+  errorMsg?: MessageString,
+  successMsg?: MessageString,
+  { ignoreError } = { ignoreError: false }
 ) => {
-  let result;
   try {
-    result = fn();
+    const result = fn();
     infoLog(stringFunc(successMsg));
     return result;
   } catch (err) {

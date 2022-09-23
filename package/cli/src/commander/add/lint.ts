@@ -5,9 +5,6 @@ import inquirer from "inquirer";
 import { ignoreError, sequenceIterate } from "../../utils/common";
 import { renderAndOutput } from "../../utils/render";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
 const createConfigFile = ({
   packageName,
   configFileName,

@@ -61,6 +61,7 @@
   "devDependencies": {
     "@types/inquirer": "^9.0.1",
     "@types/jsonfile": "^6.1.0",
-    "@types/shelljs": "^0.8.11"
+    "@types/shelljs": "^0.8.11",
+    "@types/webpack": "^5.28.0"
   }
 }

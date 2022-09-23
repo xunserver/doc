@@ -1,7 +1,7 @@
 import fetchFromGit from "download-git-repo";
 // const fetchFromNpm = require('npm-fetch')
 
-import { REPO_PREFIX, USER_PREFIX } from "../instance.js";
+import { USER_PREFIX } from "../instance";
 
 export const fetchGit = (template, dest) => {
   return fetchFromGit(`${USER_PREFIX}/${template}`, dest, function (err) {

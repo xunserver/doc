@@ -1,18 +1,18 @@
 import chalk from "chalk";
 
 const log = (message) => (message ? console.log(message) : "");
-export const errorLog = (...messages) => {
+export const errorLog = (...messages: string[]) => {
   log(chalk.red(messages));
 };
 
-export const infoLog = (...messages) => {
+export const infoLog = (...messages: string[]) => {
   log(chalk.bgBlue(messages));
 };
 
-export const successLog = (...messages) => {
+export const successLog = (...messages: string[]) => {
   log(chalk.green(messages));
 };
 
-export const warnLog = (...messages) => {
+export const warnLog = (...messages: string[]) => {
   log(chalk.yellowBright(messages));
 };

@@ -1,6 +1,6 @@
 import { program } from "commander";
 import { taskWithMessage } from "../../utils/common";
-import webpack from "webpack";
+import * as webpack from "webpack";
 import { loadEnvByMode } from "./util/env";
 import { checkUserConfig, loadConfig, resolveConfig } from "./util/config";
 

@@ -73,6 +73,7 @@ importers:
       '@types/inquirer': ^9.0.1
       '@types/jsonfile': ^6.1.0
       '@types/shelljs': ^0.8.11
+      '@types/webpack': ^5.28.0
       '@vue/compiler-sfc': ^3.2.38
       chalk: 5.0.1
       commander: 9.4.0
@@ -148,6 +149,7 @@ importers:
       '@types/inquirer': 9.0.1
       '@types/jsonfile': 6.1.0
       '@types/shelljs': 0.8.11
+      '@types/webpack': 5.28.0_vgvrjbnzfr7c2lfp65u2r6rd34
 
   package/commitlint-config:
     specifiers:
@@ -2646,6 +2648,19 @@ packages:
   /@types/web-bluetooth/0.0.15:
     resolution: {integrity: sha512-w7hEHXnPMEZ+4nGKl/KDRVpxkwYxYExuHOYXyzIzCDzEZ9ZCGMAewulr9IqJu2LR4N37fcnb1XVeuZ09qgOxhA==}
     dev: false
+
+  /@types/webpack/5.28.0_vgvrjbnzfr7c2lfp65u2r6rd34:
+    resolution: {integrity: sha512-8cP0CzcxUiFuA9xGJkfeVpqmWTk9nx6CWwamRGCj95ph1SmlRRk9KlCZ6avhCbZd4L68LvYT6l1kpdEnQXrF8w==}
+    dependencies:
+      '@types/node': 18.7.18
+      tapable: 2.2.1
+      webpack: 5.74.0_vgvrjbnzfr7c2lfp65u2r6rd34
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+      - webpack-cli
+    dev: true
 
   /@types/ws/8.5.3:
     resolution: {integrity: sha512-6YOoWjruKj1uLf3INHH7D3qTXwFfEsg1kf3c0uDdSBJwfa/llkwIjrAGV7j7mVgGNbzTQ3HiHKKDXl6bJPD97w==}

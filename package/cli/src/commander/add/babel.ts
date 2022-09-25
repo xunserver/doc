@@ -2,9 +2,15 @@ import shelljs from "shelljs";
 import { resolve } from "path";
 import inquirer from "inquirer";
 import { renderAndOutput } from "../../utils/render";
+import { AddOptions } from ".";
 
-export const babelAction = async (option) => {
-  const answer = await inquirer.prompt([
+interface babelAnswer {
+  type: string;
+  typescript: boolean;
+}
+
+export const babelAction = async (option: AddOptions) => {
+  const answer: babelAnswer = await inquirer.prompt([
     {
       type: "rawlist",
       name: "type",
@@ -30,8 +36,8 @@ export const babelAction = async (option) => {
     resolve(__dirname, `./template/${configFileName.substring(1)}`),
     configFileName,
     {
+      ...answer,
       type: answer.type === "recommended" ? "" : answer.type,
-      typescript: answer.typescript,
     }
   );
 };

@@ -1,14 +1,14 @@
 import shelljs from "shelljs";
-import { resolve, dirname } from "path";
+import { resolve } from "path";
 import inquirer from "inquirer";
-import { fileURLToPath } from "url";
 import { renderAndOutput } from "../../utils/render";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+interface PostcssAnswer {
+  isOverride: boolean;
+}
 
 export const postcssAction = async (option) => {
-  const answer = await inquirer.prompt([
+  const answer: PostcssAnswer = await inquirer.prompt([
     {
       type: "confirm",
       name: "isOverride",

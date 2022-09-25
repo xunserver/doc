@@ -4,13 +4,17 @@
     "checkJs": false,
     "target": "ESNext",
     "module": "CommonJS",
-    "moduleResolution": "Node",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "strict": true,
     "outDir": "dist",
     "noImplicitAny": false,
     "skipLibCheck": true,
     "strictNullChecks": false,
-    "esModuleInterop": true
-  }
+    "esModuleInterop": true,
+    "baseUrl": "./",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["src/**/template/*.js"]
 }

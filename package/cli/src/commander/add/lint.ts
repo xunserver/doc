@@ -3,14 +3,21 @@ import { resolve } from "path";
 import inquirer from "inquirer";
 import { ignoreError, sequenceIterate } from "../../utils/common";
 import { renderAndOutput } from "../../utils/render";
+import { AddOptions } from ".";
 
-type LintsType = "all"|"prettier"|"editorconfig"|"eslint"|"stylelint"|"commitlint";
+type LintsType =
+  | "all"
+  | "prettier"
+  | "editorconfig"
+  | "eslint"
+  | "stylelint"
+  | "commitlint";
 
 interface RenderContext {
-  type
+  type: string;
 }
 interface LintAnswers {
-  type: "vue"| "vue2"| "react"| "recommended",
+  type: "vue" | "vue2" | "react" | "recommended";
   typescript: boolean;
   lints: LintsType[];
   isOverride: boolean;
@@ -18,8 +25,11 @@ interface LintAnswers {
 interface createConfigOptions {
   packageName: string;
   configFileName: string;
-  saveDev: true;
-  renderData: (answer: LintAnswers, ) =>
+  saveDev?: true;
+  renderData?: (
+    answer: LintAnswers,
+    renderContext: RenderContext
+  ) => { [k: string]: any };
 }
 
 const createConfigFile = ({
@@ -28,7 +38,7 @@ const createConfigFile = ({
   saveDev = true,
   renderData = () => ({}),
 }: createConfigOptions) => {
-  return async function (answer, context) {
+  return async function (answer: LintAnswers, context) {
     // 安装相关依赖
     shelljs.exec(`npm i ${saveDev ? "-D" : ""} ${packageName}`);
 
@@ -37,14 +47,13 @@ const createConfigFile = ({
       ignoreError(() => shelljs.cp(configFileName, `${configFileName}.bak`));
     }
 
-    let renderContext = {};
-    renderContext.type = answer.type;
+    let renderContext: RenderContext = { type: answer.type };
     if (answer.typescript) {
       renderContext.type = answer.type + "-ts";
     }
     renderContext = {
       ...renderContext,
-      ...renderData(answer, renderContext, context),
+      ...renderData(answer, renderContext),
     };
 
     // 通过添加配置文件
@@ -98,8 +107,8 @@ const actionMaps = {
   commitlint: addCommitlint,
 };
 
-export const lintAction = async (option) => {
-  const answer = await inquirer.prompt([
+export const lintAction = async (options: AddOptions) => {
+  const answer: LintAnswers = await inquirer.prompt([
     {
       type: "rawlist",
       name: "type",
@@ -140,13 +149,8 @@ export const lintAction = async (option) => {
     return await sequenceIterate(actions, answer);
   }
 
-  const context = {
-    cwd: process.cwd(),
-  };
-
   sequenceIterate(
     answer.lints.map((lint) => actionMaps[lint]),
-    answer,
-    context
+    answer
   );
 };

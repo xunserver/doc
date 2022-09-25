@@ -6,7 +6,7 @@ import { postcssAction } from "./postcss";
 /**
  * xs add 选项
  */
-interface AddOptions {
+export interface AddOptions {
   config?: string;
   method: "git" | "npm";
 }
@@ -27,11 +27,6 @@ program
   .option("-M, --method [method]", "拉取方式", "git")
 
   .action(async (type: AddType, option: AddOptions) => {
-    const { method, config } = option;
-
-    // if (config) {
-    //   return loadByConfig();
-    // }
     switch (type) {
       case "lint":
         return lintAction(option);

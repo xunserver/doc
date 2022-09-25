@@ -1,7 +1,9 @@
-import { cssLoader, sassLoader, lessLoader } from "../loader";
 import { createAlias } from "../util/alias";
 import { createDefineFromEnv } from "../util/env";
 import { resolveFromRoot } from "../util/path";
+import { cssLoader } from "./loader/css.loader";
+import { lessLoader } from "./loader/less.loader";
+import { sassLoader } from "./loader/sass.loader";
 
 export const webpackBaseConfig = {
   context: process.cwd(),

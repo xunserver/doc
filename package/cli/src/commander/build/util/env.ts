@@ -30,9 +30,9 @@ export const loadEnvByMode = (
 
   const configList = [
     ".env",
-    `${env}.local`,
-    `${env}.${mode}`,
-    `${envMode}.local`,
+    `.env.local`,
+    `.env.${mode}`,
+    `.env.${mode}.local`,
   ].map((envFilename) => loadEnvFile(getEnvPath(envFilename)));
 
   expandEnv.expand(Object.assign({}, ...configList));

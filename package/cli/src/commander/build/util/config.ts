@@ -2,16 +2,23 @@ import { cosmiconfigSync } from "cosmiconfig";
 import { merge } from "webpack-merge";
 import { webpackBaseConfig } from "../config/build.base";
 import WebpackChain from "webpack-chain";
+import { resolve } from "path";
+
+interface UserConfig {
+  build: {
+    [k: string]: any;
+  };
+}
 
 const configSchema = {};
 
-export const checkUserConfig = (config) => {
+export const checkUserConfig = (config: UserConfig) => {
   return true;
 };
 
-export const resolveBuildConfig = (config) => {
+export const resolveBuildConfig = (config: UserConfig["build"]) => {
   let result = merge(webpackBaseConfig, config);
-  const webpackConfigChain = new WebpackChain(result);
+  let webpackConfigChain = new WebpackChain().merge(config);
 
   webpackConfigChain =
     config?.webpackChain(webpackConfigChain) || webpackConfigChain;

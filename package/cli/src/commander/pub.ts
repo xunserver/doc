@@ -1,17 +1,10 @@
 import { resolve } from "path";
 import { readFileSync } from "jsonfile";
-import * as shelljs from "shelljs";
+import shelljs from "shelljs";
 import { program } from "commander";
+import { ignoreError } from "../utils/common";
 
 const rootDir = process.cwd();
-
-const ignoreError = (fn: Function) => {
-  try {
-    fn();
-  } catch (err) {
-    console.error(err);
-  }
-};
 
 /**
  * publish 命令参数

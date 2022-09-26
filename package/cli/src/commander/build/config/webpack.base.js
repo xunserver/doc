@@ -1,12 +1,22 @@
 import { createAlias } from "../util/alias";
-import { createDefineFromEnv } from "../util/env";
+import { createDefineFromEnv } from "../../../utils/env";
 import { resolveFromRoot } from "../util/path";
 import { cssLoader } from "./loader/css.loader";
 import { lessLoader } from "./loader/less.loader";
 import { sassLoader } from "./loader/sass.loader";
+import { DefinePlugin } from "webpack";
+import CopyPlugin from "copy-webpack-plugin";
 
 export const webpackBaseConfig = {
   context: process.cwd(),
+  mode: "production",
+  entry: resolveFromRoot("src"),
+  output: {
+    path: resolveFromRoot("dist"),
+    filename: "[name].[chunkhash:8].js",
+    chunkFilename: "chunk/[name].[contenthash:8].js",
+    publicPath: "./",
+  },
   resolve: {
     alias: createAlias(),
     extensions: [".js", "jsx", "ts", "tsx"],
@@ -35,7 +45,7 @@ export const webpackBaseConfig = {
       },
     ],
   },
-  plugin: [
+  plugins: [
     new DefinePlugin(
       createDefineFromEnv({
         NODE_ENV: process.env.NODE_ENV,

@@ -34,6 +34,7 @@ export const taskWithMessage = <T>(
     infoLog(stringFunc(successMsg));
     return result;
   } catch (err) {
+    console.log(err);
     errorLog(stringFunc(errorMsg));
     if (!ignoreError) {
       process.exit();

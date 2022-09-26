@@ -1,45 +1,115 @@
 import { program } from "commander";
-import { taskWithMessage } from "../../utils/common";
 import webpack from "webpack";
-import { loadEnvByMode } from "./util/env";
-import { checkUserConfig, loadConfig, resolveConfig } from "./util/config";
+import { getConfig } from "../../utils/config";
+import merge from "webpack-merge";
+import { warnLog } from "../../utils/log";
+import { BuildConfig, CustomBuild, OriginConfig } from "src/config";
+import { webpackBaseConfig } from "./config/webpack.base";
+import WebpackChain from 'webpack-chain';
 
-interface BuildOptions {
-  configFile: string;
-  mode: "development" | "production" | string;
+/**
+ * 解析用户配置中build，和cli默认配置合并
+ * @param config 用户原始输入
+ * @returns config
+ */
+const resolveConfig = (buildConfig: BuildConfig, originConfig: OriginConfig) => {
+  const resolver = {
+    webpack: resolveWebpackConfig,
+  }
+
+  return resolver[originConfig.compiler](buildConfig)
 }
+
+/**
+ * 解析webpack配置
+ * @param buildConfig buildConfig
+ */
+const resolveWebpackConfig = (buildConfig) => {
+  let webpackConfigChain = new WebpackChain();
+  webpackConfigChain =
+    (buildConfig as BuildConfig)?.webpackChain(webpackConfigChain) || webpackConfigChain;
+
+  return merge(
+    webpackBaseConfig,
+    (buildConfig as BuildConfig).webpackConfig || {},
+    webpackConfigChain.toConfig()
+  );
+};
+
+/**
+ * 解析rollup配置
+ */
+const resolveRollupConfig = (buildConfig) => { };
+
+/**
+ * 执行webpack打包
+ */
+const webpackBuilder = (webpackConfig) => {
+  const compiler = webpack(webpackConfig);
+
+  compiler.run((err, stats) => {
+    compiler.close(() => { });
+  });
+};
+
+/**
+ * 执行rollup打包
+ */
+const rollupBuilder = (webpackConfig) => {
+  const compiler = webpack(webpackConfig);
+
+  compiler.run((err, stats) => {
+    compiler.close(() => { });
+  });
+};
+
+/**
+ * 打包器
+ */
+const builder = (compilerConfig, originConfig: OriginConfig) => {
+  const builderHandler = {
+    webpack: webpackBuilder,
+  }
+
+  return builderHandler[originConfig.compiler](compilerConfig)
+}
+
+/**
+ * 根据配置文件加载不同的build配置
+ */
+const loadDefaultBuildConfig = (compiler: OriginConfig["compiler"], config: OriginConfig) => {
+  if (compiler === 'webpack') {
+    return webpackBaseConfig
+  }
+};
 
 program
   .command("build")
   .alias("b")
   .description("构建项目，通过加载rc配置文件打包")
-  .option("-C, --config <configFile>", "指定配置文件")
   .option("-M, --mode <mode>", "指定需要加载的模式", "production")
 
-  .action(async ({ configFile, mode }) => {
-    // 校验配置文件正确性
-    const userConfig = taskWithMessage(
-      () => loadConfig(configFile),
-      "加载配置文件出错"
-    );
+  .action(async (options) => {
+    const originConfig: OriginConfig = getConfig(options);
+    let buildConfig = originConfig.build;
+    // 不支持打包
+    if (!buildConfig && buildConfig !== undefined) {
+      warnLog("当前不支持build");
+      return process.exit(); // 命令结束
+    }
 
-    // 校验配置文件正确性
-    taskWithMessage(
-      () => checkUserConfig(userConfig),
-      "配置文件有误，请检查配置",
-      "配置文件校验通过"
-    );
+    // 自定义打包
+    if (typeof buildConfig === "function") {
+      return (buildConfig as CustomBuild)(originConfig);
+    }
 
-    // 加载环境变量
-    taskWithMessage(
-      () => loadEnvByMode(mode),
-      "环境变量加载错误，请检查环境变量",
-      "环境变量加载成功"
-    );
+    if (typeof buildConfig === 'object') {
+      const compilerConfig = resolveConfig(buildConfig as BuildConfig, originConfig);
+      return builder(compilerConfig, originConfig)
+    }
 
-    const compiler = webpack(resolveConfig(userConfig).build);
-
-    compiler.run((err, stats) => {
-      compiler.close(() => {});
-    });
+    // 配置为true根据type加载默认配置
+    if (buildConfig) {
+      return builder(loadDefaultBuildConfig(originConfig.compiler, originConfig), originConfig)
+    }
   });

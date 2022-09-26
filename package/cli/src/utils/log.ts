@@ -1,8 +1,4 @@
-let chalk;
-
-import("chalk").then((m) => {
-  chalk = m.default;
-});
+import chalk from "chalk";
 
 const log = (message: string) => (message ? console.log(message) : "");
 export const errorLog = (...messages: string[]) => {

@@ -12,5 +12,36 @@ npm i -g @xunserver/cli
 #### lint
 通过问询的方式添加项目lint规则，使用会在项目中添加响应的lint规则， 包括eslint、stylelint、prettier、commitlint和editorconfig规则。
 
+### build
+支持配置文件配置打包细节
 ### pub
 通过获取当前目录下的配置文件
+
+### 配置文件详解
+仅支持cjs格式的配置文件，.xsrc.js 或者xs.config.js。 或者通过--config filename 指定配置文件
+```ts
+interface BuildFunction {
+  (config: XsConfig): any;
+}
+
+interface XsConfig {
+  type: 'vue' | 'vue2' | 'react' | 'common';  
+  typescript: boolean; // default true
+  build: Boolean  | BuildFunction | {  // 默认是webpack配置，会和默认配置合并，支持函数自定义打包和rollup打包
+    [key: string]: any
+  },
+  pub: boolean | Function | {
+    git: boolean |  {  // 是否支持自动提交git
+      origin?: string;  // 需要上传的仓库名，默认origin
+      branch?: string;  // 默认 main
+      commitMsg?: string | ((package:any) => string)  // 默认当前 `${packageJson.name} pub ${packageJson.version} + 1`
+    },
+    npmToken?: string  // npm 发布秘钥，如果未配置，从APP_NPM_TOKEN获取
+  },
+  server: {  // 如果type是
+    [key: string]: any
+  }
+}
+```
+
+

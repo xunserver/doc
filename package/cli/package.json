@@ -15,7 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "@vue/compiler-sfc": "^3.2.38",
-    "chalk": "5.0.1",
     "commander": "9.4.0",
     "copy-webpack-plugin": "^11.0.0",
     "cosmiconfig": "^7.0.1",
@@ -55,12 +54,13 @@
     "README.md"
   ],
   "scripts": {
-    "build": "rm -rf dist && tsc",
+    "build": "node build/build",
     "pub": "npm run build && node build/publish"
   },
   "devDependencies": {
     "@types/jsonfile": "^6.1.0",
     "@types/shelljs": "^0.8.11",
-    "@types/webpack": "^5.28.0"
+    "@types/webpack": "^5.28.0",
+    "chalk": "4.1.2"
   }
 }

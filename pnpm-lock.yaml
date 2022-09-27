@@ -7,15 +7,18 @@ importers:
       '@types/del': ^4.0.0
       '@types/ejs': ^3.1.1
       '@types/gulp': ^4.0.9
+      '@types/lodash': ^4.14.185
       '@types/node': ^18.7.16
       '@vitejs/plugin-vue': ^3.1.0
       '@vue/compiler-sfc': ^3.2.38
       '@xunserver/cli': ^0.1.13
       cross-env: ^7.0.3
       ejs: ^3.1.8
+      esbuild-register: ^3.3.3
       gulp: ^4.0.2
       inquirer: 9.1.0
       jsonfile: ^6.1.0
+      lodash: ^4.17.21
       rollup: 2.77.2
       shelljs: ^0.8.5
       ts-node: ^10.9.1
@@ -29,14 +32,17 @@ importers:
       '@types/del': 4.0.0
       '@types/ejs': 3.1.1
       '@types/gulp': 4.0.9
+      '@types/lodash': 4.14.185
       '@types/node': 18.7.18
       '@vitejs/plugin-vue': 3.1.0_vite@3.1.1+vue@3.2.39
       '@vue/compiler-sfc': 3.2.39
       cross-env: 7.0.3
       ejs: 3.1.8
+      esbuild-register: 3.3.3
       gulp: 4.0.2
       inquirer: 9.1.0
       jsonfile: 6.1.0
+      lodash: 4.17.21
       rollup: 2.77.2
       shelljs: 0.8.5
       ts-node: 10.9.1_bidgzm5cq2du6gnjtweqqjrrn4
@@ -5216,6 +5222,12 @@ packages:
     os: [openbsd]
     requiresBuild: true
     optional: true
+
+  /esbuild-register/3.3.3:
+    resolution: {integrity: sha512-eFHOkutgIMJY5gc8LUp/7c+LLlDqzNi9T6AwCZ2WKKl3HmT+5ef3ZRyPPxDOynInML0fgaC50yszPKfPnjC0NQ==}
+    peerDependencies:
+      esbuild: '>=0.12 <1'
+    dev: true
 
   /esbuild-sunos-64/0.15.8:
     resolution: {integrity: sha512-qMP/jR/FzcIOwKj+W+Lb+8Cfr8GZHbHUJxAPi7DUhNZMQ/6y7sOgRzlOSpRrbbUntrRZh0MqOyDhJ3Gpo6L1QA==}

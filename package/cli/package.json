@@ -5,7 +5,7 @@
   "main": "dist/index.mjs",
   "bin": {
     "xs": "dist/index.js",
-    "xs-dev": "src/index.js"
+    "xs-dev": "src/dev.js"
   },
   "keywords": [
     "cli",

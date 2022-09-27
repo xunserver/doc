@@ -1,8 +1,6 @@
 #! /usr/bin/env node
 import { program } from "commander";
 
-import "./utils/config";
-
 import "./commander/init";
 import "./commander/pub";
 import "./commander/add";

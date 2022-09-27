@@ -26,7 +26,7 @@ export const getConfig = ({ config, mode }: BaseCommanderOptions) => {
   );
 
   // 校验配置文件正确性
-  const userConfig = taskWithMessage(
+  const userConfig: OriginConfig = taskWithMessage(
     () => loadConfigFile(config),
     "加载配置文件出错"
   );

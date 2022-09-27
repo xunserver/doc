@@ -1,7 +1,7 @@
 {
   "name": "@xunserver/test",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.12",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",

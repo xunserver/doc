@@ -20,10 +20,10 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: "18.x"
-          cache: "npm"
+          cache: pnpm
           registry-url: "https://registry.npmjs.org"
 
-      - run: cd package/cli && npm i
+      - run: npm i -g pnpm && pnpm i
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 
@@ -42,7 +42,6 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: "18.x"
-          cache: "npm"
           registry-url: "https://registry.npmjs.org"
 
       - run: cd package/vui && npm i
@@ -65,7 +64,6 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: "18.x"
-          cache: "npm"
           registry-url: "https://registry.npmjs.org"
 
       - run: cd package/style && npm i
@@ -90,9 +88,7 @@ jobs:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
 
-      - run: npm i -g pnpm
-
-      - run: pnpm install
+      - run: npm i -g pnpm && pnpm i
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 

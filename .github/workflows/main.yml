@@ -20,10 +20,9 @@ jobs:
         uses: actions/setup-node@master
         with:
           node-version: "18.x"
-          cache: pnpm
           registry-url: "https://registry.npmjs.org"
 
-      - run: npm i -g pnpm && pnpm i
+      - run: npm i -g pnpm && pnpm install
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 

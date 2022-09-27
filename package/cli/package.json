@@ -1,6 +1,6 @@
 {
   "name": "@xunserver/cli",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "xs 前端脚手架工具，用于快速生成项目",
   "main": "dist/index.mjs",
   "bin": {

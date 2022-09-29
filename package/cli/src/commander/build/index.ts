@@ -1,11 +1,10 @@
 import { program } from "commander";
 import webpack from "webpack";
 import { getConfig } from "../../utils/config";
-import merge from "webpack-merge";
 import { warnLog } from "../../utils/log";
 import { BuildConfig, CustomBuild, OriginConfig } from "src/config";
-import { webpackBaseConfig } from "./config/webpack.base";
-import WebpackChain from 'webpack-chain';
+import { webpackBaseConfig } from "./config/webpack/webpack.base";
+import { resolveWebpackConfig, webpackBuilder } from "./config/webpack/index";
 
 /**
  * 解析用户配置中build，和cli默认配置合并
@@ -17,61 +16,21 @@ const resolveConfig = (buildConfig: BuildConfig, originConfig: OriginConfig) => 
     webpack: resolveWebpackConfig,
   }
 
-  return resolver[originConfig.compiler](buildConfig)
+  return resolver[originConfig.compiler](buildConfig, originConfig)
 }
-
-/**
- * 解析webpack配置
- * @param buildConfig buildConfig
- */
-const resolveWebpackConfig = (buildConfig) => {
-  let webpackConfigChain = new WebpackChain();
-  webpackConfigChain =
-    (buildConfig as BuildConfig)?.webpackChain(webpackConfigChain) || webpackConfigChain;
-
-  return merge(
-    webpackBaseConfig,
-    (buildConfig as BuildConfig).webpackConfig || {},
-    webpackConfigChain.toConfig()
-  );
-};
-
-/**
- * 解析rollup配置
- */
-const resolveRollupConfig = (buildConfig) => { };
-
-/**
- * 执行webpack打包
- */
-const webpackBuilder = (webpackConfig) => {
-  const compiler = webpack(webpackConfig);
-
-  compiler.run((err, stats) => {
-    compiler.close(() => { });
-  });
-};
-
-/**
- * 执行rollup打包
- */
-const rollupBuilder = (webpackConfig) => {
-  const compiler = webpack(webpackConfig);
-
-  compiler.run((err, stats) => {
-    compiler.close(() => { });
-  });
-};
 
 /**
  * 打包器
  */
 const builder = (compilerConfig, originConfig: OriginConfig) => {
-  const builderHandler = {
-    webpack: webpackBuilder,
+  let builderHandler;
+
+  switch (originConfig.compiler) {
+    case 'webpack':
+      builderHandler = webpackBuilder
   }
 
-  return builderHandler[originConfig.compiler](compilerConfig)
+  return builderHandler(compilerConfig)
 }
 
 /**

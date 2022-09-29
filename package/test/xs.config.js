@@ -23,10 +23,6 @@ module.exports = {
         clean: true,
       },
     },
-    webpackChain: (config) => {
-      // 合并上面的config
-      return config;
-    },
   },
   server: {
     // 合并到

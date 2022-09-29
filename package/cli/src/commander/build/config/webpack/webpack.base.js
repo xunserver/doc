@@ -1,30 +1,38 @@
-import { createAlias } from "../util/alias";
-import { createDefineFromEnv } from "../../../utils/env";
-import { resolveFromRoot } from "../util/path";
+import { createAlias } from "../../util/alias";
+import { createDefineFromEnv } from "../../../../utils/env";
+import {
+  resolveFromProjectRoot,
+  resolveFromCliRoot,
+} from "../../../../utils/path";
 import { cssLoader } from "./loader/css.loader";
 import { lessLoader } from "./loader/less.loader";
 import { sassLoader } from "./loader/sass.loader";
 import { DefinePlugin } from "webpack";
 import CopyPlugin from "copy-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
 export const webpackBaseConfig = {
   context: process.cwd(),
   mode: "production",
-  entry: resolveFromRoot("src"),
+  entry: resolveFromProjectRoot("src"),
   output: {
-    path: resolveFromRoot("dist"),
+    path: resolveFromProjectRoot("dist"),
     filename: "[name].[chunkhash:8].js",
     chunkFilename: "chunk/[name].[contenthash:8].js",
     publicPath: "./",
+    clean: true,
   },
   resolve: {
     alias: createAlias(),
     extensions: [".js", "jsx", "ts", "tsx"],
   },
+  resolveLoader: {
+    modules: ["node_modules", resolveFromCliRoot("node_modules")],
+  },
   module: {
     rules: [
       {
-        test: /\.(t|j).sx?$/,
+        test: /\.jsx?$/,
         use: [
           {
             loader: "esbuild-loader",
@@ -54,10 +62,11 @@ export const webpackBaseConfig = {
     new CopyPlugin({
       patterns: [
         {
-          from: resolveFromRoot("src/public"),
-          to: resolveFromRoot("dist/public"),
+          from: resolveFromProjectRoot("src/public"),
+          to: resolveFromProjectRoot("dist/public"),
         },
       ],
     }),
+    new MiniCssExtractPlugin(),
   ],
 };

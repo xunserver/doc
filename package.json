@@ -1,6 +1,6 @@
 {
   "name": "xunserver",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "xuncool 仓库合集",
   "main": "index.js",
   "private": true,

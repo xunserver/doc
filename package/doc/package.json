@@ -14,7 +14,6 @@
   "license": "ISC",
   "dependencies": {
     "@xunserver/icon-vue": "workspace:*",
-    "@xunserver/prettier-config": "workspace:*",
     "@xunserver/style": "workspace:*",
     "@xunserver/vui": "workspace:*",
     "vitepress": "1.0.0-alpha.13"

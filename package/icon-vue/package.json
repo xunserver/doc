@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@xunserver/prettier-config": "^0.0.3",
     "vite-plugin-dts": "^1.4.1"
   },
   "main": "./dist/lib/index.js",
@@ -27,7 +28,7 @@
   ],
   "types": "dist/es/index.d.ts",
   "dependencies": {
-    "@xunserver/util": "workspace:*",
-    "@xunserver/icon": "workspace:*"
+    "@xunserver/icon": "workspace:*",
+    "@xunserver/util": "workspace:*"
   }
 }

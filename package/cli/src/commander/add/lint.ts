@@ -16,6 +16,7 @@ type LintsType =
 interface RenderContext {
   type: string;
 }
+
 interface LintAnswers {
   type: "vue" | "vue2" | "react" | "recommended";
   typescript: boolean;

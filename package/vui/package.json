@@ -10,9 +10,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@xunserver/style": "workspace:^0.0.1",
-    "@xunserver/eslint-config": "workspace:^0.0.7",
-    "@xunserver/prettier-config": "workspace:^0.0.2",
+    "@xunserver/style": "^0.0.1",
+    "@xunserver/eslint-config": "^0.0.7",
+    "@xunserver/prettier-config": "^0.0.2",
     "vite-plugin-dts": "^1.4.1"
   },
   "main": "./dist/cjs/index.js",

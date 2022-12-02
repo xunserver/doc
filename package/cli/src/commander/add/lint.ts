@@ -1,4 +1,4 @@
-import shelljs from "shelljs";
+import { exec, cp } from "@xunserver/shell";
 import { resolve } from "path";
 import inquirer from "inquirer";
 import { ignoreError, sequenceIterate } from "../../utils/common";
@@ -41,11 +41,11 @@ const createConfigFile = ({
 }: createConfigOptions) => {
   return async function (answer: LintAnswers, context) {
     // 安装相关依赖
-    shelljs.exec(`npm i ${saveDev ? "-D" : ""} ${packageName}`);
+    exec(`npm i ${saveDev ? "-D" : ""} ${packageName}`);
 
     if (!answer.isOverride) {
       // 备份本地的.eslintrc.js
-      ignoreError(() => shelljs.cp(configFileName, `${configFileName}.bak`));
+      ignoreError(() => cp(configFileName, `${configFileName}.bak`));
     }
 
     let renderContext: RenderContext = { type: answer.type };
@@ -87,12 +87,9 @@ const addPrettier = createConfigFile({
 });
 
 const addEditorconfig = async function () {
-  shelljs.exec("npm i @xunserver/vscode-config");
-  ignoreError(() => shelljs.cp(".editorconfig", ".editorconfig.bak"));
-  shelljs.cp(
-    "node_modules/@xunserver/vscode-config/.editorconfig",
-    ".editorconfig"
-  );
+  exec("npm i @xunserver/vscode-config");
+  ignoreError(() => cp(".editorconfig", ".editorconfig.bak"));
+  cp("node_modules/@xunserver/vscode-config/.editorconfig", ".editorconfig");
 };
 
 const addCommitlint = createConfigFile({

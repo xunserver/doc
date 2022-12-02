@@ -1,3 +1,3 @@
 module.exports = {
-    extends: ['@xunserver/stylelint-config/<%= type %>']
-}
+  extends: ["@xunserver/stylelint-config/<%= type %>"],
+};

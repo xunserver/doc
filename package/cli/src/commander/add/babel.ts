@@ -1,8 +1,8 @@
-import shelljs from "shelljs";
 import { resolve } from "path";
+import { exec, cp } from "@xunserver/shell";
 import inquirer from "inquirer";
 import { renderAndOutput } from "../../utils/render";
-import { AddOptions } from ".";
+import { AddOptions } from "./index";
 
 interface babelAnswer {
   type: string;
@@ -26,10 +26,10 @@ export const babelAction = async (option: AddOptions) => {
     },
   ]);
 
-  shelljs.exec("npm i -D @xunserver/babel-config");
+  exec("npm i -D @xunserver/babel-config");
 
   const configFileName = ".babelrc.js";
-  shelljs.cp(configFileName, `${configFileName}.bak`);
+  cp(configFileName, `${configFileName}.bak`);
 
   // 通过添加配置文件
   renderAndOutput(

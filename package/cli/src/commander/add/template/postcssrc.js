@@ -1,5 +1,3 @@
 module.exports = {
-    plugins: [
-        ...(require('@xunserver/postcss-config').plugins)
-    ]
-}
+  plugins: [...require("@xunserver/postcss-config").plugins],
+};

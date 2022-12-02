@@ -1,3 +1,3 @@
 module.exports = {
-    extends: ['@xunserver/commitlint-config']
-}
+  extends: ["@xunserver/commitlint-config"],
+};

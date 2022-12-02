@@ -1,4 +1,4 @@
-import shelljs from "shelljs";
+import { exec, cp } from "@xunserver/shell";
 import { resolve } from "path";
 import inquirer from "inquirer";
 import { renderAndOutput } from "../../utils/render";
@@ -17,12 +17,12 @@ export const postcssAction = async (option) => {
     },
   ]);
 
-  shelljs.exec("npm i -D @xunserver/postcss-config");
+  exec("npm i -D @xunserver/postcss-config");
 
   const configFileName = ".postcssrc.js";
 
   if (!answer.isOverride) {
-    shelljs.cp(configFileName, `${configFileName}.bak`);
+    cp(configFileName, `${configFileName}.bak`);
   }
 
   // 通过添加配置文件

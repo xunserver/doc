@@ -1,1 +1,0 @@
-<!--@include: ../../commitlint-config/README.md-->

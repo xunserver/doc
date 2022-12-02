@@ -3,11 +3,12 @@
     "target": "ESNext",
     "module": "ESNext",
     "esModuleInterop": true,
-    "moduleResolution": "NodeNext",
     "sourceMap": true,
     "strict": false,
     "skipLibCheck": true,
-    "outDir": "dist"
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "declarationMap": true
   },
   "include": ["src"]
 }

@@ -8,70 +8,52 @@ on:
   workflow_dispatch:
 
 jobs:
-  # cli 发布npm
-  publish_cli:
+  publish-npm:
     runs-on: ubuntu-latest
-    if: contains(github.event.commits[0].message, '(cli)') && contains(github.event.commits[0].message, '[pub]')
+    if: contains(github.event.commits[0].message, '[pub]')
     steps:
       - name: pull code
         uses: actions/checkout@master
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          run_install: false
 
       - name: node and npm
         uses: actions/setup-node@master
         with:
           node-version: "18.x"
+          cache: "pnpm"
           registry-url: "https://registry.npmjs.org"
-
-      - run: npm i -g pnpm && pnpm install
-
-      - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
-
-      - run: cd package/cli && npm run pub
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
-  # vui 发布npm
-  publish_vui:
-    runs-on: ubuntu-latest
-    if: contains(github.event.commits[0].message, '(vui)') && contains(github.event.commits[0].message, '[pub]')
-    steps:
-      - name: pull code
-        uses: actions/checkout@master
-
-      - name: node and npm
-        uses: actions/setup-node@master
-        with:
-          node-version: "18.x"
-          registry-url: "https://registry.npmjs.org"
-
-      - run: cd package/vui && npm i
-
-      - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
-
-      - run: cd package/vui && npm run pub
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
 
-  # style 发布 npm
-  publish_style:
-    runs-on: ubuntu-latest
-    if: contains(github.event.commits[0].message, '(style)') && contains(github.event.commits[0].message, '[pub]')
-    steps:
-      - name: pull code
-        uses: actions/checkout@master
+      - name: delete husky
+        run: npm pkg delete scripts.prepare
 
-      - name: node and npm
-        uses: actions/setup-node@master
-        with:
-          node-version: "18.x"
-          registry-url: "https://registry.npmjs.org"
+      - name: pnpm install
+        run: |
+          pnpm install --frozen-lockfile
 
-      - run: cd package/style && npm i
+      - name: changeset version
+        run: pnpm changeset version
 
-      - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
+      - name: pnpm publish
+        run: pnpm -r run pub
 
-      - run: cd package/style && npm run pub
+      - name: pnpm publish
+        run: pnpm publish -r --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
+
+      - name: git push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m 'publish version'
+          git push
 
   # doc 部署到githubpage
   deploy_doc:
@@ -182,51 +164,3 @@ jobs:
           gitee-password: ${{ secrets.GITEE_PASSWORD }}
           gitee-repo: "xuncool/doc"
           branch: main
-
-  # 发布icon基础库
-  publish_icon:
-    runs-on: ubuntu-latest
-    if: contains(github.event.commits[0].message, '(icon)') && contains(github.event.commits[0].message, '[pub]')
-    steps:
-      - name: pull code
-        uses: actions/checkout@master
-
-      - name: node and npm
-        uses: actions/setup-node@master
-        with:
-          node-version: "18.x"
-          registry-url: "https://registry.npmjs.org"
-
-      - run: npm i -g pnpm
-
-      - run: pnpm i
-
-      - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
-
-      - run: cd package/icon && npm run pub
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}
-
-  # 发布icon基础库
-  publish_icon_vue:
-    runs-on: ubuntu-latest
-    if: contains(github.event.commits[0].message, '(icon-vue)') && contains(github.event.commits[0].message, '[pub]')
-    steps:
-      - name: pull code
-        uses: actions/checkout@master
-
-      - name: node and npm
-        uses: actions/setup-node@master
-        with:
-          node-version: "18.x"
-          registry-url: "https://registry.npmjs.org"
-
-      - run: npm i -g pnpm
-
-      - run: pnpm i
-
-      - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
-
-      - run: cd package/icon-vue && npm run pub
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_TOKEN}}

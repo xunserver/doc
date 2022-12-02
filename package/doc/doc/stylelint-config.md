@@ -1,1 +1,0 @@
-<!--@include: ../../stylelint-config/README.md-->

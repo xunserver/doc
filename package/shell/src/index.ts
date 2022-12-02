@@ -1,1 +1,1 @@
-let a: number = 123;
+export * from "./shell";

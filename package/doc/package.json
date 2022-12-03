@@ -1,0 +1,22 @@
+{
+  "name": "@xunserver/doc",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vitepress dev doc",
+    "build": "vitepress build doc",
+    "build:doc": "cross-env APP_BASE=/doc/ vitepress build doc",
+    "serve": "vitepress serve doc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@xunserver/icon-vue": "workspace:*",
+    "@xunserver/prettier-config": "workspace:*",
+    "@xunserver/style": "workspace:*",
+    "@xunserver/vui": "workspace:*",
+    "vitepress": "1.0.0-alpha.13"
+  }
+}

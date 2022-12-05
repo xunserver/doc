@@ -7,7 +7,7 @@
   "scripts": {
     "pub": "node build/publish.mjs",
     "preinstall": "npx only-allow pnpm",
-    "clear": "npx rimraf 'package/*/{node_modules}' 'node_modules'"
+    "clean": "pnpm -r run clean && pnpm rimraf 'package/*/node_modules' 'node_modules'"
   },
   "keywords": [],
   "author": "",

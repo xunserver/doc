@@ -1,1 +1,1 @@
-<!--@include: ../../prettier-config/README.md-->
+<!--@include: ../../config/package/prettier-config/README.md-->

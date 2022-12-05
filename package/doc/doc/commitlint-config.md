@@ -1,1 +1,1 @@
-<!--@include: ../../commitlint-config/README.md-->
+<!--@include: ../../config/package/commitlint-config/README.md-->

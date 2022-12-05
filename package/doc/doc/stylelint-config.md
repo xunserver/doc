@@ -1,1 +1,1 @@
-<!--@include: ../../stylelint-config/README.md-->
+<!--@include: ../../config/package/stylelint-config/README.md-->

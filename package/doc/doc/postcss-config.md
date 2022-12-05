@@ -1,1 +1,1 @@
-<!--@include: ../../postcss-config/README.md-->
+<!--@include: ../../config/package/postcss-config/README.md-->

@@ -1,1 +1,1 @@
-<!--@include: ../../cli/README.md-->
+<!--@include: ../../cli/package/cli/README.md-->

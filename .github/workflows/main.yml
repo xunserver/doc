@@ -21,19 +21,14 @@ jobs:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
 
-      - run: npm i -g pnpm && pnpm i
+      - run: |
+        git submodule update --init --recursive --remote
+        rm -rf pnpm-lock.yaml
+        npm i -g pnpm
+        pnpm install
+        pnpm -F @xunserver/doc... run build
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
-
-      - run: |
-          pnpm -F @xunserver/style run build
-          pnpm -F @xunserver/vui run build
-          pnpm -F @xunserver/icon run g
-          pnpm -F @xunserver/icon run build
-          pnpm -F @xunserver/icon-vue run g
-          pnpm -F @xunserver/icon-vue run build
-
-      - run: pnpm -F @xunserver/doc run build
 
       - name: deploy github
         uses: peaceiris/actions-gh-pages@v3
@@ -47,7 +42,6 @@ jobs:
   # doc 部署到gitee
   deploy_gitee_doc:
     runs-on: ubuntu-latest
-    if: contains(github.event.commits[0].message, '(doc)')
     steps:
       - name: pull code
         uses: actions/checkout@master
@@ -58,23 +52,14 @@ jobs:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
 
-      - run: npm i -g pnpm
-
-      - run: pnpm install
+      - run: |
+        git submodule update --init --recursive --remote
+        rm -rf pnpm-lock.yaml
+        npm i -g pnpm
+        pnpm install
+        pnpm -F @xunserver/doc... run build
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
-
-      - run: |
-          pnpm -F @xunserver/style run build
-          pnpm -F @xunserver/vui run build
-          pnpm -F @xunserver/icon run g
-          pnpm -F @xunserver/icon run build
-          pnpm -F @xunserver/icon-vue run g
-          pnpm -F @xunserver/icon-vue run build
-
-      - run: pnpm -F @xunserver/icon-vue run build
-
-      - run: pnpm -F @xunserver/doc run build:doc
 
       - name: deploy github
         uses: peaceiris/actions-gh-pages@v3

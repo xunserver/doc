@@ -1,1 +1,1 @@
-<!--@include: ../../babel-config/README.md-->
+<!--@include: ../../config/package/babel-config/README.md-->

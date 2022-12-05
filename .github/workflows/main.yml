@@ -7,7 +7,7 @@ on:
       - test
   workflow_dispatch:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "0 0 4 * *"
 
 jobs:
   # doc 部署到githubpage

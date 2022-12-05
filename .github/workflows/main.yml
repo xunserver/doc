@@ -14,13 +14,15 @@ jobs:
     steps:
       - name: pull code
         uses: actions/checkout@master
+        with:
+          submodules: true
 
       - name: node and npm
         uses: actions/setup-node@master
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
-          submodules: true
+          # ssh-key: ${{ secrets.SSH_KEY }}
 
       - run: |
           git submodule update --init --recursive --remote
@@ -46,13 +48,14 @@ jobs:
     steps:
       - name: pull code
         uses: actions/checkout@master
+        with:
+          submodules: true
 
       - name: node and npm
         uses: actions/setup-node@master
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
-          submodules: true
 
       - run: |
           git submodule update --init --recursive --remote

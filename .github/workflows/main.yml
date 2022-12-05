@@ -62,7 +62,8 @@ jobs:
           rm -rf pnpm-lock.yaml
           npm i -g pnpm
           pnpm install
-          pnpm -F @xunserver/doc... run build
+          pnpm -F @xunserver/doc...^ run build
+          pnpm -F @xunserver/doc run build:doc
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 

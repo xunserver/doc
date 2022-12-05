@@ -22,11 +22,11 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - run: |
-        git submodule update --init --recursive --remote
-        rm -rf pnpm-lock.yaml
-        npm i -g pnpm
-        pnpm install
-        pnpm -F @xunserver/doc... run build
+          git submodule update --init --recursive --remote
+          rm -rf pnpm-lock.yaml
+          npm i -g pnpm
+          pnpm install
+          pnpm -F @xunserver/doc... run build
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
 

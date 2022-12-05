@@ -1,0 +1,12 @@
+[submodule "config"]
+	path = package/config
+	url = git@github.com:xunserver/config.git
+	branch = main
+[submodule "xui"]
+	path = package/xui
+	url = git@github.com:xunserver/xui.git
+	branch = main
+[submodule "cli"]
+	path = package/cli
+	url = git@github.com:xunserver/cli.git
+	branch = main

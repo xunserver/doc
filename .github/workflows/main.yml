@@ -20,6 +20,7 @@ jobs:
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
+          submodules: true
 
       - run: |
           git submodule update --init --recursive --remote
@@ -51,6 +52,7 @@ jobs:
         with:
           node-version: "18.x"
           registry-url: "https://registry.npmjs.org"
+          submodules: true
 
       - run: |
           git submodule update --init --recursive --remote

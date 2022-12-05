@@ -1,1 +1,1 @@
-<!--@include: ../../config/package/babel-config/README.md-->
+<!--@include: ../../config/package/eslint-config/README.md-->

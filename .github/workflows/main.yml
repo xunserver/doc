@@ -6,6 +6,8 @@ on:
       - main
       - test
   workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"
 
 jobs:
   # doc 部署到githubpage
@@ -62,7 +64,7 @@ jobs:
           rm -rf pnpm-lock.yaml
           npm i -g pnpm
           pnpm install
-          pnpm -F @xunserver/doc...^ run build
+          pnpm -F @xunserver/doc^... run build
           pnpm -F @xunserver/doc run build:doc
 
       - run: git config --local user.email "bot@auto.xunserver.cn" && git config --local user.name "bot"
